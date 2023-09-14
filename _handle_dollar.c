@@ -1,8 +1,6 @@
 #include "lance.h"
 #include "helpers.h"
 
-int g_status = 0;
-
 /**
  * _handle_dollar - Handle variable replacement for $?, $$
  *
@@ -10,9 +8,9 @@ int g_status = 0;
  * and replaces them with their respective values.
  *
  * @prompt_args: An array of command arguments.
+ * @status: The status of the last command executed.
  */
-
-void _handle_dollar(char **prompt_args)
+void _handle_dollar(char **prompt_args, int status)
 {
 	int i;
 	char *path, *arg;
@@ -26,7 +24,7 @@ void _handle_dollar(char **prompt_args)
 			{
 				/* Replacing $? */
 				/* The status of the last command executed */
-				printf("%d\n", g_status);
+				printf("%d\n", status);
 			}
 			else if (_strcmp(arg, "$$") == 0)
 			{
@@ -51,3 +49,4 @@ void _handle_dollar(char **prompt_args)
 		}
 	}
 }
+

@@ -3,7 +3,7 @@
 
 void _handle_built_in_prompt(char **prompt_args);
 void _handle_logical_operators(char **prompt_args);
-void _process_prompt(const char *prompt);
+void _process_prompt(const char *prompt, int *status);
 
 /**
  * _prompt_processor - Processes and executes
@@ -14,8 +14,9 @@ void _process_prompt(const char *prompt);
 
 void _prompt_processor(const char *prompt)
 {
-	/* Split into separate function calls */
-	_process_prompt(prompt);
+	int status = 0; /* Status initialization */
+
+	_process_prompt(prompt, &status); /* Passing status by reference */
 }
 
 /**
@@ -64,9 +65,10 @@ void _handle_logical_operators(char **prompt_args)
  * _process_prompt - Process and execute a single prompt.
  *
  * @prompt: The prompt string to be executed.
+ * @status: A pointer to the status variable.
  */
 
-void _process_prompt(const char *prompt)
+void _process_prompt(const char *prompt, int *status)
 {
 	int arg_count, j;
 	char **prompt_args;
@@ -88,8 +90,8 @@ void _process_prompt(const char *prompt)
 		_expand_env_variables(prompt_args[j]);
 	}
 
-	/* Handle variable replacement for $? and $$ */
-	_handle_dollar(prompt_args);
+	/* Pass status to _handle_dollar */
+	_handle_dollar(prompt_args, *status); /* Passing status by value */
 
 	/* Check if it's a built-in command */
 	_handle_built_in_prompt(prompt_args);
@@ -106,3 +108,4 @@ void _process_prompt(const char *prompt)
 	/* Free memory allocated for prompt_args */
 	free(prompt_args);
 }
+

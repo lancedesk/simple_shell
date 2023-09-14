@@ -62,6 +62,6 @@ void _initialize_aliases(void);
 void _handle_alias(char **prompt_args);
 int _handle_comments(char **prompt_args);
 
-void _handle_dollar(char **prompt_args);
+void _handle_dollar(char **prompt_args, int status);
 
 #endif
