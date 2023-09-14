@@ -5,8 +5,8 @@
  * count_tokens - Counts the number of tokens in a string.
  *
  * @str: The input string containing tokens.
- * Return : The count of tokens in the string.
- */
+ * Return: The count of tokens in the string.
+*/
 
 int count_tokens(const char *str)
 {

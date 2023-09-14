@@ -21,7 +21,7 @@ char *_path_basename(char *path)
 		if (*ptr == '/')
 		{
 			/* Move basename to the character after '/' */
-			basename = ptr + 1; 
+			basename = ptr + 1;
 		}
 		ptr++;
 	}

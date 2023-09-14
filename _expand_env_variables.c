@@ -31,7 +31,6 @@ void _expand_env_variables(char *prompt)
 		{
 			var++;
 		}
-
 		/* A substring for the variable name */
 		var_len = var - (dollar_sign + 1);
 
@@ -43,13 +42,10 @@ void _expand_env_variables(char *prompt)
 			/* Handle memory allocation failure */
 			exit(EXIT_FAILURE);
 		}
-
 		strncpy(var_name, dollar_sign + 1, var_len);
 		var_name[var_len] = '\0';
-
 		/* Get the value of the environment variable */
 		val = getenv(var_name);
-
 		/* Replace the variable with its value in the prompt */
 		if (val != NULL)
 		{
@@ -57,8 +53,6 @@ void _expand_env_variables(char *prompt)
 			memmove(dollar_sign + val_len, var, _strlen(var) + 1);
 			memcpy(dollar_sign, val, val_len);
 		}
-
-		/* Free the dynamically allocated memory */
 		free(var_name);
 	}
 }

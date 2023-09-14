@@ -9,16 +9,17 @@
  *
  * Return: A pointer to the next token found
  * in the input string, or NULL if no more tokens
- * are available. 
+ * are available.
  */
 
-char* _strtok(char* str, const char* delim)
+char *_strtok(char *str, const char *delim)
 {
 	/* Stores the state between calls */
-	static char* saved_str = NULL;
-	char *token_start, *token_end; 
+	static char *saved_str = NULL;
+	char *token_start, *token_end;
 
-	if (str != NULL) {
+	if (str != NULL)
+	{
 		saved_str = str;
 	}
 	else if (saved_str == NULL)

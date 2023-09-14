@@ -8,7 +8,7 @@
  * "lance_shell$ ", along with the current working directory
  * (with "Lance-Shell/" prefix), to the standard
  * output (stdout).
- * It is used to indicate that the shell 
+ * It is used to indicate that the shell
  * is ready to accept user input.
  */
 
@@ -19,12 +19,10 @@ void _prompter(void)
 	size_t shell_path_len;
 
 	current_wd = getcwd(cwd, sizeof(cwd));
-
 	if (current_wd != NULL)
 	{
 		home_dir = getenv("HOME");
 		dir_name = _path_basename(cwd);
-
 		/* Construct the full shell path as"home_dir/dir_name"*/
 		/* +1 for '/', +1 for null terminator */
 		shell_path_len = _strlen(home_dir) + _strlen(dir_name) + 2;
@@ -42,7 +40,6 @@ void _prompter(void)
 			{
 				printf("Lance-Shell/%s$ ", dir_name);
 			}
-			/* Free the allocated memory */
 			free(shell_path);
 		}
 		else

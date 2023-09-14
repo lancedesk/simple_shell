@@ -30,9 +30,7 @@ void _handle_logical_or(char **prompt_args)
 		single_prompt[0] = prompt_args[i];
 		/* Null-terminate the array */
 		single_prompt[1] = NULL;
-
 		child_process_id = fork();
-
 		if (child_process_id == -1)
 		{
 			_printer("Forking error\n");

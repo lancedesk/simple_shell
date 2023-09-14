@@ -31,7 +31,7 @@ ssize_t _getline(char **buffer, size_t *size)
 		if (!*buffer)
 		{
 			perror("Memory allocation failed");
-			return -1;
+			return (-1);
 		}
 	}
 

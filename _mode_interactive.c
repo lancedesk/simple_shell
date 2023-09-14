@@ -11,9 +11,9 @@
  * processes it using the input processor and prompt
  * processor, and repeats this process until the
  * program is terminated.
- */
+*/
 
-void _mode_interactive()
+void _mode_interactive(void)
 {
 	char *prompt = NULL;
 	size_t size = 0, max_size = 0;

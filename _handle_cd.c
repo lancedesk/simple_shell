@@ -19,25 +19,20 @@ void _handle_cd(char **prompt_args)
 	if (_strcmp(prompt_args[0], "cd") == 0)
 	{
 		new_dir = NULL;
-
 		if (arg1 == NULL || _strcmp(arg1, "~") == 0)
 		{
-			/* No argument or "~" provided, change to */
-			/* the home directory */
+			/* No arg or "~" provided, change to home dir */
 			new_dir = getenv("HOME");
 		}
 		else if (_strcmp(arg1, "-") == 0)
 		{
-			/* Handle "cd -" to switch to the previous */
-			/* directory */
+			/* Handle "cd -" to switch to the previous dir */
 			new_dir = getenv("OLDPWD");
 		}
 		else
 		{
-			/* Change to the specified directory */
-			new_dir = arg1;
+			new_dir = arg1; /* Change to specified dir */
 		}
-
 		if (new_dir != NULL)
 		{
 			if (chdir(new_dir) == -1)

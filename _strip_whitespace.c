@@ -6,17 +6,17 @@
  * whitespace from a string.
  *
  * @str: The string to be stripped of whitespace.
- * @Return: A new dynamically allocated string
+ * Return: A new dynamically allocated string
  * with leading and trailing whitespace removed.
- */
+*/
 
-char* _strip_whitespace(const char *str)
+char *_strip_whitespace(const char *str)
 {
 	size_t len, start, end, new_len;
 	char *new_str;
 
 	if (str == NULL)
-		return NULL;
+		return (NULL);
 
 	/* Find the length of the string */
 	len = strlen(str);
@@ -37,7 +37,7 @@ char* _strip_whitespace(const char *str)
 	new_len = end - start + 1;
 
 	/* Allocate memory for the new string */
-	new_str = (char*)malloc(new_len + 1);
+	new_str = (char *)malloc(new_len + 1);
 
 	if (new_str == NULL)
 	{
@@ -51,6 +51,5 @@ char* _strip_whitespace(const char *str)
 
 	/* Null-terminate the new string */
 	new_str[new_len] = '\0';
-
 	return (new_str);
 }
