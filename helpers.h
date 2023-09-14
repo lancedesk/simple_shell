@@ -10,6 +10,9 @@
 /* Constant for maximum number of aliases */
 #define MAX_ALIASES 128
 
+/* Declare the external environment variable */
+extern char **environ;
+
 int count_tokens(const char *str);
 char **copy_tokens(const char *str, int count);
 char *read_input(size_t *length, size_t *max_length);

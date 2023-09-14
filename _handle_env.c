@@ -19,8 +19,6 @@
 void _handle_env(char **prompt_args)
 {
 	char **env;
-	/* Declare the external environment variable */
-	extern char **environ;
 
 	if (_strcmp(prompt_args[0], "env") == 0)
 	{
@@ -31,3 +29,4 @@ void _handle_env(char **prompt_args)
 		}
 	}
 }
+
