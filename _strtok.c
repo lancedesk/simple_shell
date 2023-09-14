@@ -15,7 +15,7 @@
 char *_strtok(char *str, const char *delim)
 {
 	/* Stores the state between calls */
-	static char *saved_str = NULL;
+	static char *saved_str;
 	char *token_start, *token_end;
 
 	if (str != NULL)
@@ -24,10 +24,8 @@ char *_strtok(char *str, const char *delim)
 	}
 	else if (saved_str == NULL)
 	{
-		/* No string to tokenize */
-		return (NULL);
+		return (NULL); /* No string to tokenize */
 	}
-
 	token_start = saved_str;
 	token_end = saved_str;
 
@@ -36,33 +34,24 @@ char *_strtok(char *str, const char *delim)
 	{
 		token_start++;
 	}
-
 	if (*token_start == '\0')
 	{
-		/* No more tokens */
-		saved_str = NULL;
+		saved_str = NULL; /* No more tokens */
 		return (NULL);
 	}
-
-	/* Find the end of the token */
-	token_end = token_start;
+	token_end = token_start; /* Find the end of the token */
 	while (*token_end && !strchr(delim, *token_end))
 	{
 		token_end++;
 	}
-
 	if (*token_end != '\0')
 	{
-		/* Null-terminate the token */
-		*token_end = '\0';
-		/* Update saved_str for the next call */
-		saved_str = token_end + 1;
+		*token_end = '\0'; /* Null-terminate the token */
+		saved_str = token_end + 1; /* Update saved_str for the next call */
 	}
 	else
 	{
-		/* No more tokens after this */
-		saved_str = NULL;
+		saved_str = NULL; /* No more tokens after this */
 	}
-
 	return (token_start);
 }
