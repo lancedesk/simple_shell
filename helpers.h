@@ -15,7 +15,7 @@ char **copy_tokens(const char *str, int count);
 char *read_input(size_t *length, size_t *max_length);
 char *allocate_input_buffer(size_t *size);
 void free_input_buffer(char *buffer);
-char* _strip_whitespace(const char *str);
+char *_strip_whitespace(const char *str);
 
 /* In-buil prmompt handlers */
 void _handle_exit(char **prompt_args);
@@ -39,15 +39,26 @@ void _execute_single_prompt(char **prompt_args);
 char *_path_basename(char *path);
 void _expand_env_variables(char *prompt);
 
-/* Structure to hold alias mappings */
-typedef struct {
-    char *name;
-    char *value;
+/**
+ * struct alias - Structure to store alias mappings.
+ *
+ * This structure represents an alias mapping,
+ * where 'name' is a pointer to the alias name, and 'value'
+ * is a pointer to the alias value or replacement text.
+ *
+ * @name: Pointer to the alias name
+ * @value: Pointer to the alias value
+ */
+
+typedef struct alias
+{
+	char *name;
+	char *value;
 } Alias;
 
 extern Alias aliases[MAX_ALIASES];
 
-void _initialize_aliases();
+void _initialize_aliases(void);
 void _handle_alias(char **prompt_args);
 int _handle_comments(char **prompt_args);
 

@@ -16,7 +16,7 @@
 #include <stdbool.h>
 
 ssize_t _getline(char **buffer, size_t *size);
-char* _strtok(char* str, const char* delim);
+char *_strtok(char *str, const char *delim);
 int _atoi(const char *str);
 size_t _strlen(const char *str);
 char *_strcpy(char *dest, const char *src);
@@ -29,9 +29,10 @@ void _prompt_processor(const char *prompt);
 
 /* File and interactive modes */
 void _mode_file(const char *filename);
-void _mode_interactive();
+void _mode_interactive(void);
 
 /* Global g_status initialization */
 extern int g_status;
 
 #endif
+
