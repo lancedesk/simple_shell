@@ -23,8 +23,7 @@ void _input_processor(char *prompt, size_t size, FILE *file, int fd)
 
 	if (file == NULL && fd != -1)
 	{
-		/* File descriptor mode: Read from the provided */
-		/* file descriptor */
+		/* File descriptor mode: Read from the provided file descriptor*/
 		read_bytes = read(fd, prompt, size);
 	}
 	else if (file != NULL)
@@ -34,17 +33,14 @@ void _input_processor(char *prompt, size_t size, FILE *file, int fd)
 	}
 	else
 	{
-		/* Interactive mode: Read from stdin */
-		_printer("Lance-Shell$ ");
+		_printer("Lance-Shell$ "); /* Interactive mode: Read from stdin */
 		read_bytes = _getline(&prompt, &size);
 	}
-
 	if (read_bytes == -1)
 	{
 		if (feof(file) || (fd != -1 && read_bytes == 0))
 		{
-			/* End of file reached, exit if in file mode */
-			if (file != stdin)
+			if (file != stdin) /* End of file reached, exit if in file mode */
 			{
 				if (file != NULL)
 				{
@@ -58,9 +54,7 @@ void _input_processor(char *prompt, size_t size, FILE *file, int fd)
 			perror("Error reading user input...\n");
 		}
 	}
-
-	/* Remove newline character if present */
-	if (prompt[read_bytes - 1] == '\n')
+	if (prompt[read_bytes - 1] == '\n') /* Remove /n char if present */
 	{
 		prompt[read_bytes - 1] = '\0';
 	}

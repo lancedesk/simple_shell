@@ -23,11 +23,13 @@ void _handle_unsetenv(char **prompt_args)
 	{
 		if (unsetenv(prompt_args[1]) != 0)
 		{
-			/* fprintf(stderr, "unsetenv: Unable to unset environment variable\n"); */
+			/* fprintf(stderr, "unsetenv: Unable to unset */
+			/* environment variable\n"); */
 		}
 	}
 	else
 	{
-		/* fprintf(stderr, "unsetenv: Invalid syntax. Usage: unsetenv VARIABLE\n"); */
+		/* fprintf(stderr, "unsetenv: Invalid syntax. */
+		/* Usage: unsetenv VARIABLE\n"); */
 	}
 }

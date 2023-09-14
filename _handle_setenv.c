@@ -28,6 +28,7 @@ void _handle_setenv(char **prompt_args)
 	}
 	else
 	{
-		/* fprintf(stderr, "setenv: Invalid syntax. Usage: setenv VARIABLE VALUE\n"); */
+		/* fprintf(stderr, "setenv: Invalid syntax. */
+		/* Usage: setenv VARIABLE VALUE\n"); */
 	}
 }
