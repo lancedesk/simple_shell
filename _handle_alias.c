@@ -13,7 +13,7 @@ Alias aliases[MAX_ALIASES];
  * to prepare it for storing alias mappings.
  */
 
-void _initialize_aliases()
+void _initialize_aliases(void)
 {
 	int i;
 

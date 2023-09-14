@@ -11,25 +11,7 @@
  * If the command fails, it prints an error message to stderr.
  *
  * @prompt_args: An array of command arguments.
- */
-
-#include "lance.h"
-#include "helpers.h"
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
-
-/**
- * _execute_single_prompt - Execute a single shell command.
- *
- * This function takes an array of command arguments
- * and executes a single shell command in a child
- * process. It handles forking,
- * executing the command, and waiting for its completion.
- * If the command fails, it prints an error message to stderr.
- *
- * @prompt_args: An array of command arguments.
- */
+*/
 
 void _execute_single_prompt(char **prompt_args)
 {

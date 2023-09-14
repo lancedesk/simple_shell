@@ -20,7 +20,7 @@ void _handle_logical_or(char **prompt_args)
 {
 	pid_t child_process_id;
 	int i = 0, status;
-	/* Flag to track if any prompt succeeded */  
+	/* Flag to track if any prompt succeeded */
 	int success = 0;
 	/* Temporary array for a single prompt */
 	char *single_prompt[2];

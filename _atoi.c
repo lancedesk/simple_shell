@@ -11,7 +11,7 @@
  * white spaces.
  *
  * @str: The input string to convert.
- * @Return: The integer value represented
+ * Return: The integer value represented
  * by the input string.
  * If the input is not a valid integer,
  * it returns 0.
