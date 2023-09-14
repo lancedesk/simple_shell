@@ -15,48 +15,48 @@
  *
  * Return: A dynamically allocated character buffer
  * containing the user input
-*/
+ */
 
 char *read_input(size_t *length, size_t *max_length)
 {
-    int c;
-    char *input = NULL, *temp;
-    size_t i;
+	int c;
+	char *input = NULL, *temp;
+	size_t i;
 
-    /* Initialize max_length */
-    *max_length = INITIAL_MAX_LENGTH;
-    
-    /* Allocate memory for the input buffer */
-    /* using the new function */
-    input = allocate_input_buffer(max_length);
+	/* Initialize max_length */
+	*max_length = INITIAL_MAX_LENGTH;
 
-    /* Initialize length */
-    *length = 0;
+	/* Allocate memory for the input buffer */
+	/* using the new function */
+	input = allocate_input_buffer(max_length);
 
-    while ((c = getchar()) != '\n' && c != EOF)
-    {
-        if (*length >= *max_length - 1)
-        {
-            /* Double the buffer size */
-            *max_length *= 2;
-            temp = allocate_input_buffer(max_length);
+	/* Initialize length */
+	*length = 0;
 
-            /* Copy data from old buffer to new one */
-            for (i = 0; i < *length; i++)
-            {
-                temp[i] = input[i];
-            }
+	while ((c = getchar()) != '\n' && c != EOF)
+	{
+		if (*length >= *max_length - 1)
+		{
+			/* Double the buffer size */
+			*max_length *= 2;
+			temp = allocate_input_buffer(max_length);
 
-            /* Free the old buffer */
-            free_input_buffer(input);
-            input = temp;
-        }
-        input[(*length)++] = (char)c;
-    }
+			/* Copy data from old buffer to new one */
+			for (i = 0; i < *length; i++)
+			{
+				temp[i] = input[i];
+			}
 
-    /* Null-terminate the input string */
-    input[*length] = '\0';
+			/* Free the old buffer */
+			free_input_buffer(input);
+			input = temp;
+		}
+		input[(*length)++] = (char)c;
+	}
 
-    /* Return the dynamically allocated buffer */
-    return (input);
+	/* Null-terminate the input string */
+	input[*length] = '\0';
+
+	/* Return the dynamically allocated buffer */
+	return (input);
 }

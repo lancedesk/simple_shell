@@ -13,17 +13,17 @@
  * to perform the requested action.
  *
  * @prompt_args: An array of command arguments.
-*/
+ */
 
 void _inbuilt_prompts(char **prompt_args)
 {
-  /* Handle some of the in-build prompts */
-  _handle_exit(prompt_args);
-  _handle_env(prompt_args);
-  _handle_cd(prompt_args);
-  _handle_path(prompt_args);
-  _handle_pwd(prompt_args);
-  _handle_setenv(prompt_args);
-  _handle_unsetenv(prompt_args);
-  _handle_alias(prompt_args);
+	/* Handle some of the in-build prompts */
+	_handle_exit(prompt_args);
+	_handle_env(prompt_args);
+	_handle_cd(prompt_args);
+	_handle_path(prompt_args);
+	_handle_pwd(prompt_args);
+	_handle_setenv(prompt_args);
+	_handle_unsetenv(prompt_args);
+	_handle_alias(prompt_args);
 }

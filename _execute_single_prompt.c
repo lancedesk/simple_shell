@@ -11,7 +11,7 @@
  * If the command fails, it prints an error message to stderr.
  *
  * @prompt_args: An array of command arguments.
-*/
+ */
 
 #include "lance.h"
 #include "helpers.h"
@@ -29,33 +29,33 @@
  * If the command fails, it prints an error message to stderr.
  *
  * @prompt_args: An array of command arguments.
-*/
+ */
 
 void _execute_single_prompt(char **prompt_args)
 {
-    int status;
-    pid_t child_process_id = fork();
+	int status;
+	pid_t child_process_id = fork();
 
-    if (child_process_id == -1)
-    {
-        perror("Forking error");
-        exit(EXIT_FAILURE);
-    }
-    else if (child_process_id == 0)
-    {
-        if (execvp(prompt_args[0], prompt_args) == -1)
-        {
-            perror("Prompt execution error");
-            exit(EXIT_FAILURE);
-        }
-    }
-    else
-    {
-        waitpid(child_process_id, &status, 0);
-        if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
-        {
-            _printer("Prompt execution failed\n");
-            exit(EXIT_FAILURE);
-        }
-    }
+	if (child_process_id == -1)
+	{
+		perror("Forking error");
+		exit(EXIT_FAILURE);
+	}
+	else if (child_process_id == 0)
+	{
+		if (execvp(prompt_args[0], prompt_args) == -1)
+		{
+			perror("Prompt execution error");
+			exit(EXIT_FAILURE);
+		}
+	}
+	else
+	{
+		waitpid(child_process_id, &status, 0);
+		if (WIFEXITED(status) && WEXITSTATUS(status) != 0)
+		{
+			_printer("Prompt execution failed\n");
+			exit(EXIT_FAILURE);
+		}
+	}
 }

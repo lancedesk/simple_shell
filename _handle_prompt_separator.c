@@ -19,44 +19,44 @@
 
 void _handle_prompt_separator(char **prompt_args)
 {
-  int i;
-  char *trimmed_prompt;
+	int i;
+	char *trimmed_prompt;
 
-  for (i = 0; prompt_args[i] != NULL; i++)
-  {
-    if (_strcmp(prompt_args[i], ";") == 0)
-    {
-      /* Replace the semicolon with a NULL terminator */
-      prompt_args[i] = NULL;
+	for (i = 0; prompt_args[i] != NULL; i++)
+	{
+		if (_strcmp(prompt_args[i], ";") == 0)
+		{
+			/* Replace the semicolon with a NULL terminator */
+			prompt_args[i] = NULL;
 
-      /* Strip trailing whitespace */
-prompt_args[i - 1] = _strip_whitespace(prompt_args[i - 1]);
-/* Strip leading whitespace */
-trimmed_prompt = _strip_whitespace(prompt_args[i + 1]);
+			/* Strip trailing whitespace */
+			prompt_args[i - 1] = _strip_whitespace(prompt_args[i - 1]);
+			/* Strip leading whitespace */
+			trimmed_prompt = _strip_whitespace(prompt_args[i + 1]);
 
-/* Update prompt_args with the trimmed prompt */
-prompt_args[i + 1] = trimmed_prompt;
+			/* Update prompt_args with the trimmed prompt */
+			prompt_args[i + 1] = trimmed_prompt;
 
-/* Recursively call _prompt_processor with the first prompt */
-_prompt_processor(prompt_args[i - 1]);
+			/* Recursively call _prompt_processor with the first prompt */
+			_prompt_processor(prompt_args[i - 1]);
 
-/* Recursively call _prompt_processor with the second prompt */
-_prompt_processor(trimmed_prompt);
+			/* Recursively call _prompt_processor with the second prompt */
+			_prompt_processor(trimmed_prompt);
 
 
-      /* Move the pointer to the next command after the separator */
-      prompt_args = &prompt_args[i + 2];
+			/* Move the pointer to the next command after the separator */
+			prompt_args = &prompt_args[i + 2];
 
-      /* Recursively call _handle_prompt_separator with the remaining commands */
-      _handle_prompt_separator(prompt_args);
+			/* Recursively call _handle_prompt_separator with the remaining commands */
+			_handle_prompt_separator(prompt_args);
 
-      return;
-    }
-  }
+			return;
+		}
+	}
 
-  /* If no separator found, execute the last command */
+	/* If no separator found, execute the last command */
 
-  /* Strip trailing whitespace */
-  _strip_whitespace(prompt_args[i - 1]);
-  _prompt_processor(prompt_args[i - 1]);
+	/* Strip trailing whitespace */
+	_strip_whitespace(prompt_args[i - 1]);
+	_prompt_processor(prompt_args[i - 1]);
 }

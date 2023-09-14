@@ -15,36 +15,36 @@
  * by the input string.
  * If the input is not a valid integer,
  * it returns 0.
-*/
+ */
 
 int _atoi(const char *str)
 {
-  int result = 0;
-  /* Initialize sign as positive */
-  int sign = 1;
+	int result = 0;
+	/* Initialize sign as positive */
+	int sign = 1;
 
-  /* Skip leading white spaces */
-  while (*str == ' ' || *str == '\t')
-    str++;
+	/* Skip leading white spaces */
+	while (*str == ' ' || *str == '\t')
+		str++;
 
-  /* Check for a sign (+/-) */
-  if (*str == '-')
-  {
-    sign = -1;
-    str++;
-  }
-  else if (*str == '+')
-  {
-    str++;
-  }
+	/* Check for a sign (+/-) */
+	if (*str == '-')
+	{
+		sign = -1;
+		str++;
+	}
+	else if (*str == '+')
+	{
+		str++;
+	}
 
-  /* Convert the digits to an integer */
-  while (*str >= '0' && *str <= '9')
-  {
-    result = result * 10 + (*str - '0');
-    str++;
-  }
+	/* Convert the digits to an integer */
+	while (*str >= '0' && *str <= '9')
+	{
+		result = result * 10 + (*str - '0');
+		str++;
+	}
 
-  /* Apply the sign */
-  return (sign * result);
+	/* Apply the sign */
+	return (sign * result);
 }

@@ -18,17 +18,17 @@
 
 void _handle_logical_and(char **prompt_args)
 {
-  int i = 0;
-  /* Size of the array */
-  char *single_prompt[2];
+	int i = 0;
+	/* Size of the array */
+	char *single_prompt[2];
 
-    while (prompt_args[i] != NULL)
-    {
-      single_prompt[0] = prompt_args[i];
-      /* Null-terminate the array */
-      single_prompt[1] = NULL;
-      /* Pass a single-prompt array */
-      _execute_single_prompt(single_prompt);
-      i++;
-    }
+	while (prompt_args[i] != NULL)
+	{
+		single_prompt[0] = prompt_args[i];
+		/* Null-terminate the array */
+		single_prompt[1] = NULL;
+		/* Pass a single-prompt array */
+		_execute_single_prompt(single_prompt);
+		i++;
+	}
 }

@@ -15,19 +15,19 @@
  * Command syntax: unsetenv VARIABLE
  *
  * @prompt_args: An array of command arguments.
-*/
+ */
 
 void _handle_unsetenv(char **prompt_args)
 {
-    if (prompt_args[1] != NULL)
-    {
-        if (unsetenv(prompt_args[1]) != 0)
-        {
-            /* fprintf(stderr, "unsetenv: Unable to unset environment variable\n"); */
-        }
-    }
-    else
-    {
-        /* fprintf(stderr, "unsetenv: Invalid syntax. Usage: unsetenv VARIABLE\n"); */
-    }
+	if (prompt_args[1] != NULL)
+	{
+		if (unsetenv(prompt_args[1]) != 0)
+		{
+			/* fprintf(stderr, "unsetenv: Unable to unset environment variable\n"); */
+		}
+	}
+	else
+	{
+		/* fprintf(stderr, "unsetenv: Invalid syntax. Usage: unsetenv VARIABLE\n"); */
+	}
 }

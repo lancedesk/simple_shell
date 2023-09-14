@@ -14,20 +14,20 @@
  * The last element of the array is a null pointer.
  *
  * @prompt_args: An array of command arguments.
-*/
+ */
 
 void _handle_env(char **prompt_args)
 {
-    char** env;
-    /* Declare the external environment variable */
-    extern char** environ;
+	char **env;
+	/* Declare the external environment variable */
+	extern char **environ;
 
-    if (_strcmp(prompt_args[0], "env") == 0)
-    {
-        /* Iterate and print each environment variable */
-        for (env = environ; *env != NULL; env++)
-        {
-            printf("%s\n", *env);
-        }
-    }
+	if (_strcmp(prompt_args[0], "env") == 0)
+	{
+		/* Iterate and print each environment variable */
+		for (env = environ; *env != NULL; env++)
+		{
+			printf("%s\n", *env);
+		}
+	}
 }

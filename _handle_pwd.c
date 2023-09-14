@@ -10,22 +10,22 @@
  * directory, it reports the error.
  *
  * @prompt_args: An array of command arguments.
-*/
+ */
 
 void _handle_pwd(char **prompt_args)
 {
-  if (_strcmp(prompt_args[0], "pwd") == 0)
-  {
-    /* Get and print the current working directory */
-    char cwd[1024];
-    
-    if (getcwd(cwd, sizeof(cwd)) != NULL)
-    {
-      printf("%s\n", cwd);
-    }
-    else
-    {
-      perror("getcwd error");
-    }
-  }
+	if (_strcmp(prompt_args[0], "pwd") == 0)
+	{
+		/* Get and print the current working directory */
+		char cwd[1024];
+
+		if (getcwd(cwd, sizeof(cwd)) != NULL)
+		{
+			printf("%s\n", cwd);
+		}
+		else
+		{
+			perror("getcwd error");
+		}
+	}
 }

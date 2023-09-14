@@ -11,18 +11,18 @@
  * processes it using the input processor and prompt
  * processor, and repeats this process until the
  * program is terminated.
-*/
+ */
 
 void _mode_interactive()
 {
-  char *prompt = NULL;
-  size_t size = 0, max_size = 0;
+	char *prompt = NULL;
+	size_t size = 0, max_size = 0;
 
-  while (1)
-  {
-    _prompter();
-    prompt = read_input(&size, &max_size);
-    _prompt_processor(prompt);
-    free(prompt);
-  }
+	while (1)
+	{
+		_prompter();
+		prompt = read_input(&size, &max_size);
+		_prompt_processor(prompt);
+		free(prompt);
+	}
 }

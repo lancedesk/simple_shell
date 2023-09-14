@@ -10,9 +10,9 @@
  * otherwise, -1 is returned,
  * and errno is set to indicate the error.
  *
-*/
+ */
 
 int _printer(const char *prompt)
 {
-  return (write(STDOUT_FILENO, prompt, strlen(prompt)));
+	return (write(STDOUT_FILENO, prompt, strlen(prompt)));
 }

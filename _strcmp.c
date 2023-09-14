@@ -20,21 +20,21 @@
  * Return: An integer less than, equal to,
  * or greater than zero,
  * depending on the comparison result.
-*/
+ */
 
 int _strcmp(const char *strn1, const char *strn2)
 {
-  int result, strn1_result, strn2_result;
-  
-  while (*strn1 && (*strn1 == *strn2))
-  {
-    strn1++;
-    strn2++;
-  }
+	int result, strn1_result, strn2_result;
 
-  strn1_result = *(unsigned char *)strn1;
-  strn2_result = *(unsigned char *)strn2;
+	while (*strn1 && (*strn1 == *strn2))
+	{
+		strn1++;
+		strn2++;
+	}
 
-  result =  strn1_result - strn2_result;
-  return (result);
+	strn1_result = *(unsigned char *)strn1;
+	strn2_result = *(unsigned char *)strn2;
+
+	result =  strn1_result - strn2_result;
+	return (result);
 }

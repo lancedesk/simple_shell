@@ -7,24 +7,24 @@
  *
  * @path: The path from which to extract the directory name.
  * Return: A pointer to the last part of the path.
-*/
+ */
 
 char *_path_basename(char *path)
 {
-  char *basename, *ptr;
-  
-  basename = path;
-  ptr = path;
+	char *basename, *ptr;
 
-  while (*ptr != '\0')
-  {
-    if (*ptr == '/')
-    {
-      /* Move basename to the character after '/' */
-      basename = ptr + 1; 
-    }
-      ptr++;
-  }
+	basename = path;
+	ptr = path;
 
-  return (basename);
+	while (*ptr != '\0')
+	{
+		if (*ptr == '/')
+		{
+			/* Move basename to the character after '/' */
+			basename = ptr + 1; 
+		}
+		ptr++;
+	}
+
+	return (basename);
 }

@@ -14,40 +14,40 @@ int g_status = 0;
 
 void _handle_dollar(char **prompt_args)
 {
-  int i;
-  char *path, *arg;
-  
-  for (i = 0; prompt_args[i] != NULL; i++)
-  {
-    arg = prompt_args[i];
-    if (arg[0] == '$')
-    {
-      if (_strcmp(arg, "$?") == 0)
-      {
-        /* Replacing $? */
-        /* The status of the last command executed */
-        printf("%d\n", g_status);
-      }
-      else if (_strcmp(arg, "$$") == 0)
-      {
-        /* Replacing $$ */
-        /* The process ID of the shell */
-        printf("%d\n", getpid());
-      }
-      else if (_strcmp(arg, "$PATH") == 0)
-      {
-        /* $PATH replaced with the current PATH */
-        /* environment variable */
-        path = getenv("PATH");
-        if (path != NULL)
-        {
-          printf("%s\n", path);
-        }
-      }
-      else
-      {
-        /* To handle other variables later */
-      }
-    }
-  }
+	int i;
+	char *path, *arg;
+
+	for (i = 0; prompt_args[i] != NULL; i++)
+	{
+		arg = prompt_args[i];
+		if (arg[0] == '$')
+		{
+			if (_strcmp(arg, "$?") == 0)
+			{
+				/* Replacing $? */
+				/* The status of the last command executed */
+				printf("%d\n", g_status);
+			}
+			else if (_strcmp(arg, "$$") == 0)
+			{
+				/* Replacing $$ */
+				/* The process ID of the shell */
+				printf("%d\n", getpid());
+			}
+			else if (_strcmp(arg, "$PATH") == 0)
+			{
+				/* $PATH replaced with the current PATH */
+				/* environment variable */
+				path = getenv("PATH");
+				if (path != NULL)
+				{
+					printf("%s\n", path);
+				}
+			}
+			else
+			{
+				/* To handle other variables later */
+			}
+		}
+	}
 }
