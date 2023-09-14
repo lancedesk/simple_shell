@@ -31,8 +31,5 @@ void _prompt_processor(const char *prompt);
 void _mode_file(const char *filename);
 void _mode_interactive(void);
 
-/* Global g_status initialization */
-extern int g_status;
-
 #endif
 
