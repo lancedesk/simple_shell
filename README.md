@@ -67,7 +67,5 @@ $ ./lance script.txt
 ```
 
 ## Acknowledgments
-Robert Adede & Avumile Ndlovu 
-collaborated
 
 Lance Shell was developed as an educational project to learn about Unix-like shells and C programming. It draws inspiration from various Unix shells and shell scripting concepts.
