@@ -39,6 +39,7 @@ void _handle_prompt_separator(char **prompt_args);
 /* Handle logical && and || operators */
 void _handle_logical_and(char **prompt_args);
 void _handle_logical_or(char **prompt_args);
+void _handle_logical_operators(char **prompt_args);
 
 void _execute_single_prompt(char **prompt_args);
 char *_path_basename(char *path);
