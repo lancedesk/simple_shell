@@ -28,6 +28,8 @@ void _handle_path(char **prompt_args);
 void _handle_pwd(char **prompt_args);
 void _handle_setenv(char **prompt_args);
 void _handle_unsetenv(char **prompt_args);
+void _handle_ls(char **prompt_args);
+void _handle_clear(char **prompt_args);
 
 /* Main in-built prompt handler */
 void _inbuilt_prompts(char **prompt_args);

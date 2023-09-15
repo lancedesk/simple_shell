@@ -94,7 +94,7 @@ void _process_prompt(const char *prompt, int *status)
 	_handle_dollar(prompt_args, *status); /* Passing status by value */
 
 	/* Check if it's a built-in command */
-	_handle_built_in_prompt(prompt_args);
+	_inbuilt_prompts(prompt_args);
 
 	/* Handle logical operators */
 	_handle_logical_operators(prompt_args);

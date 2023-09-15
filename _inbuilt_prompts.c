@@ -26,4 +26,6 @@ void _inbuilt_prompts(char **prompt_args)
 	_handle_setenv(prompt_args);
 	_handle_unsetenv(prompt_args);
 	_handle_alias(prompt_args);
+	_handle_ls(prompt_args);
+	_handle_clear(prompt_args);
 }

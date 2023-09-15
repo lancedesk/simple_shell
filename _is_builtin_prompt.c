@@ -19,14 +19,16 @@ int _is_builtin_prompt(const char *prompt)
 
 	/* List of built-in prompts */
 	const char *builtin_prompts[] = {
+		"clear",
+		"ls",
 		"exit",
 		"env",
 		"cd",
 		"PATH",
 		"pwd",
 		"alias",
-		/* "setenv", */
-		/* "unsetenv", */
+		"setenv",
+		"unsetenv",
 		NULL /* NULL-terminated array */
 	};
 
