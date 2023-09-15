@@ -18,6 +18,8 @@ Alias aliases[MAX_ALIASES];
 void _handle_alias(char **prompt_args)
 {
 	char *name, *value;
+	Alias *alias;
+	int i;
 
 	if (prompt_args[1] == NULL)
 	{
@@ -30,7 +32,7 @@ void _handle_alias(char **prompt_args)
 		/* as the second argument, */
 		/* treat it as an alias name without a value */
 		name = prompt_args[1];
-		Alias *alias = _find_alias_by_name(name);
+		alias = _find_alias_by_name(name);
 
 		if (alias != NULL)
 		{
@@ -40,7 +42,7 @@ void _handle_alias(char **prompt_args)
 		else
 		{
 			/* Alias not found */
-			perror("Alias '%s' not found.\n", name);
+			printf("Alias '%s' not found.\n", name);
 		}
 	}
 	else
@@ -50,7 +52,7 @@ void _handle_alias(char **prompt_args)
 		name = prompt_args[1];
 		value = prompt_args[2];
 
-		Alias *alias = _find_alias_by_name(name);
+		alias = _find_alias_by_name(name);
 
 		if (alias != NULL)
 		{
@@ -67,7 +69,7 @@ void _handle_alias(char **prompt_args)
 		{
 			/* Alias with the same name not found, */
 			/* create a new alias */
-			for (int i = 0; i < MAX_ALIASES; i++)
+			for (i = 0; i < MAX_ALIASES; i++)
 			{
 				if (aliases[i].name == NULL)
 				{
@@ -135,3 +137,4 @@ Alias *_find_alias_by_name(const char *name)
 	}
 	return (NULL);
 }
+
