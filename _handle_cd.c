@@ -44,14 +44,14 @@ void _handle_cd(char **prompt_args)
 				/* Update the PWD environment variable */
 				setenv("PWD", new_dir, 1);
 				/* Print the new working directory */
-				printf("Changed directory to %s\n", new_dir);
+				/* printf("Changed directory to %s\n", new_dir); */
 				/* Update the OLDPWD environment variable */
 				setenv("OLDPWD", getenv("PWD"), 1);
 			}
 		}
 		else
 		{
-			printf("Usage: cd [DIRECTORY | ~ | -]\n");
+			_puts("Usage: cd [DIRECTORY | ~ | -]");
 		}
 	}
 }
