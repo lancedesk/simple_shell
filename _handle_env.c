@@ -25,7 +25,7 @@ void _handle_env(char **prompt_args)
 		/* Iterate and print each environment variable */
 		for (env = environ; *env != NULL; env++)
 		{
-			printf("%s\n", *env);
+			_puts(*env);
 		}
 	}
 }

@@ -21,7 +21,7 @@ void _handle_pwd(char **prompt_args)
 
 		if (getcwd(cwd, sizeof(cwd)) != NULL)
 		{
-			printf("%s\n", cwd);
+			_puts(cwd);
 		}
 		else
 		{
