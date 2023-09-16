@@ -67,6 +67,9 @@ void _process_prompt(const char *prompt, int *status)
 	/* Check if it's a built-in command */
 	_handle_built_in_prompt(prompt_args);
 
+	/* Search for prompts in PATH */
+	_handle_prompt_path(prompt_args);
+
 	/* Handle logical operators */
 	_handle_logical_operators(prompt_args);
 
@@ -79,4 +82,6 @@ void _process_prompt(const char *prompt, int *status)
 	/* Free memory allocated for prompt_args */
 	free(prompt_args);
 }
+
+
 
