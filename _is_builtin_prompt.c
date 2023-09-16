@@ -1,3 +1,7 @@
+void _handle_echo(char **prompt_args);
+
+
+
 #include "lance.h"
 #include "helpers.h"
 
@@ -29,6 +33,7 @@ int _is_builtin_prompt(const char *prompt)
 		"alias",
 		"setenv",
 		"unsetenv",
+		"echo",
 		NULL /* NULL-terminated array */
 	};
 

@@ -1,3 +1,7 @@
+void _handle_echo(char **prompt_args);
+
+
+
 #include "lance.h"
 #include "helpers.h"
 
@@ -31,6 +35,7 @@ void _inbuilt_prompts(char **prompt_args)
 		"alias",
 		"ls",
 		"clear",
+		"echo",
 		NULL /* NULL-terminated array */
 	};
 
@@ -92,6 +97,9 @@ void _call_builtin_handler(int index, char **prompt_args)
 			break;
 		case 9:
 			_handle_clear(prompt_args);
+			break;
+		case 10:
+			_handle_echo(prompt_args);
 			break;
 	}
 }
