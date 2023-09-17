@@ -25,9 +25,15 @@ void _handle_prompt_path(char **prompt_args)
 	{
 		prompt_path = NULL;
 
-		if (_search_in_path(prompt_args[0], &prompt_path, token))
+		/* Check if the prompt_args[0] is a full path or just the executable name */
+		if (_search_in_path(prompt_args[0],
+					&prompt_path, token)
+				|| access(prompt_args[0], X_OK) == 0
+		   )
 		{
-			if (_execute_prompt(prompt_path, prompt_args))
+			if (_execute_prompt(prompt_path ?
+						prompt_path : prompt_args[0], prompt_args)
+			   )
 			{
 				return;
 			}
@@ -50,7 +56,18 @@ void _handle_prompt_path(char **prompt_args)
 
 int _search_in_path(const char *prompt, char **prompt_path, const char *token)
 {
-	*prompt_path = malloc(strlen(token) + strlen(prompt) + 2);
+	if (access(prompt, X_OK) == 0)
+	{
+		*prompt_path = strdup(prompt);
+		if (*prompt_path == NULL)
+		{
+			perror("strdup error");
+			return (0);
+		}
+		return (1);
+	}
+
+	*prompt_path = malloc(_strlen(token) + _strlen(prompt) + 2);
 
 	if (*prompt_path == NULL)
 	{

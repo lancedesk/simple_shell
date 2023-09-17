@@ -5,7 +5,7 @@
 #include <stdio.h>
 
 /* Define initial buffer size */
-#define INITIAL_MAX_LENGTH 100
+#define INITIAL_MAX_LENGTH 128
 
 /* Constant for maximum number of aliases */
 #define MAX_ALIASES 128
