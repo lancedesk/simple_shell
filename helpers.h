@@ -72,6 +72,13 @@ int _handle_comments(char **prompt_args);
 void _handle_dollar(char **prompt_args, int status);
 void _handle_prompt_path(char **prompt_args);
 
+/* Input processors */
+ssize_t read_input_from_stdin(char *prompt, size_t size);
+ssize_t read_input_from_fd(char *prompt, size_t size, int fd);
+ssize_t read_input_from_file(char *prompt, size_t size, FILE *file);
+ssize_t _read_input_from_pipe(char *prompt, size_t size);
+int is_input_from_pipe(void);
+
 #endif
 
 
