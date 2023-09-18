@@ -6,7 +6,7 @@
  *
  * @str: The input string containing tokens.
  * Return: The count of tokens in the string.
- */
+*/
 
 int count_tokens(const char *str)
 {
@@ -28,6 +28,8 @@ int count_tokens(const char *str)
 		token = _strtok(NULL, " ");
 	}
 
+	/* Free the copy of the original string */
+	free(copy);
 	return (count);
 }
 
@@ -79,6 +81,7 @@ char **copy_tokens(const char *str, int count)
 	/* Null-terminate the tokens array */
 	tokens[i] = NULL;
 
+	/* Free the copy of the original string */
+	free(copy);
 	return (tokens);
 }
-

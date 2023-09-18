@@ -1,22 +1,19 @@
 #include "lance.h"
-#include "helpers.h"
 
 /**
  * _strdup - Duplicates a string.
  *
  * @str: The string to duplicate.
  *
- * Return: A statically allocated duplicate
+ * Return: A dynamically allocated duplicate
  * of the input string.
- * Returns NULL if the input string is NULL or if the string is too long.
+ * Returns NULL if memory allocation fails.
  */
 
 char *_strdup(const char *str)
 {
 	size_t len;
-
-	/* Define a static buffer with a maximum size */
-	static char static_buffer[STR_INPUT_MAX_LENGTH];
+	char *new_string;
 
 	if (str == NULL)
 	{
@@ -24,16 +21,14 @@ char *_strdup(const char *str)
 	}
 
 	len = _strlen(str);
+	new_string = (char *)malloc(len + 1);
 
-	/* Check if the string is too long for the static buffer */
-	if (len >= STR_INPUT_MAX_LENGTH)
+	if (new_string == NULL)
 	{
+		/* Memory allocation failed */
 		return (NULL);
 	}
 
-	/* Copy the input string to the static buffer */
-	_strcpy(static_buffer, str);
-
-	return (static_buffer);
+	_strcpy(new_string, str);
+	return (new_string);
 }
-

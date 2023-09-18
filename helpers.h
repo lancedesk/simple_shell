@@ -7,9 +7,6 @@
 /* Define initial buffer size */
 #define INITIAL_MAX_LENGTH 128
 
-/* Define initial string size */
-#define STR_INPUT_MAX_LENGTH 10000
-
 /* Constant for maximum number of aliases */
 #define MAX_ALIASES 128
 
@@ -83,4 +80,5 @@ ssize_t _read_input_from_pipe(char *prompt, size_t size);
 int is_input_from_pipe(void);
 
 #endif
+
 
