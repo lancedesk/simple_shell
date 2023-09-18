@@ -55,8 +55,6 @@ void _process_prompt(const char *prompt, int *status)
 	/* Handle comments */
 	if (_handle_comments(prompt_args))
 	{
-		/* This is a comment line, exit early */
-		free(prompt_args);
 		return;
 	}
 
@@ -84,4 +82,5 @@ void _process_prompt(const char *prompt, int *status)
 	/* Free memory allocated for prompt_args */
 	free(prompt_args);
 }
+
 
