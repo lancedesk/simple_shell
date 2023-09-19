@@ -2,28 +2,36 @@
 #include "helpers.h"
 
 /**
- * _handle_comments - Handle lines that start
- * with a comment character '#'.
+ * _handle_comments - Handle lines that contain comments.
  *
  * @prompt_args: An array of command arguments.
  *
- * Return: Returns 1 if the line is a comment
+ * Return: Returns 1 if the line contains a comment
  * and has been handled, 0 otherwise.
  */
 
 int _handle_comments(char **prompt_args)
 {
-	/* Check if the line starts with a comment */
-	/* character '#' */
+	int i;
+	char *comment_pos, *arg;
 
-	if (prompt_args[0][0] == '#')
+	/* Iterate through the arguments */
+	for (i = 0; prompt_args[i] != NULL; i++)
 	{
-		/* This is a comment line, ignore it */
-		free(prompt_args);
-		/* Indicate that the line is a comment */
-		return (1);
+		arg = prompt_args[i];
+		comment_pos = strchr(arg, '#');  /* Find '#' char */
+
+		if (comment_pos != NULL)
+		{
+			/* If '#' char found, terminate the argument before '#' */
+			*comment_pos = '\0';
+
+			/* Indicate that the line contains a comment */
+			return (1);
+		}
 	}
 
-	/* Indicate that the line is not a comment */
+	/* Indicate that the line does not contain a comment */
 	return (0);
 }
+
