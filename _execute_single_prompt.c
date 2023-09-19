@@ -25,7 +25,7 @@ void _execute_single_prompt(char **prompt_args)
 	}
 	else if (child_process_id == 0)
 	{
-		if (execvp(prompt_args[0], prompt_args) == -1)
+		if (execve(prompt_args[0], prompt_args, environ) == -1)
 		{
 			perror("Prompt execution error");
 			exit(EXIT_FAILURE);

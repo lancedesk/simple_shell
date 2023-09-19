@@ -27,7 +27,7 @@ void _handle_ls(char **prompt_args)
 	if (pid == 0)
 	{
 		/* This code runs in the child process */
-		execvp("ls", prompt_args);
+		execve("ls", prompt_args, environ);
 
 		/* If execvp returns, an error occurred */
 		perror("ls");
