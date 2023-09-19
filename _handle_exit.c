@@ -26,16 +26,11 @@ void _handle_exit(char **prompt_args)
 		if (prompt_args[1] != NULL)
 		{
 			status_code = _atoi(prompt_args[1]);
-
-			/* Free the prompt_args array before exit */
-			free(prompt_args);
 			exit(status_code);
 		}
 		else
 		{
 			/* No status code provided, exit with a default status */
-			/* Free the prompt_args array before exit */
-			free(prompt_args);
 			exit(EXIT_SUCCESS);
 		}
 	}
