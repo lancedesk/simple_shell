@@ -21,28 +21,23 @@
 void _input_processor(char *prompt, size_t size, FILE *file, int fd)
 {
 	ssize_t read_bytes;
-
+	/* File mode: Read from the provided FILE structure */
 	if (file != NULL)
 	{
-		/* File mode: Read from the provided FILE structure */
 		read_bytes = read_input_from_file(prompt, size, file);
 	}
-	else if (fd != -1)
+	else if (fd != -1) /* Fd mode: Read from provided fd */
 	{
-		/* File descriptor mode: Read from the provided file descriptor */
 		read_bytes = read_input_from_fd(prompt, size, fd);
 	}
-	else if (is_input_from_pipe())
+	else if (is_input_from_pipe()) /* Input from a pipe */
 	{
-		/* Input coming from a pipe */
 		read_bytes = _read_input_from_pipe(prompt, size);
 	}
-	else
+	else /* Interactive mode: Read from stdin */
 	{
-		/* Interactive mode: Read from stdin */
 		read_bytes = read_input_from_stdin(prompt, size);
 	}
-
 	if (read_bytes == -1)
 	{
 		if (feof(file) || (fd != -1 && read_bytes == 0))
@@ -61,7 +56,6 @@ void _input_processor(char *prompt, size_t size, FILE *file, int fd)
 			perror("Error reading user input...\n");
 		}
 	}
-
 	if (prompt[read_bytes - 1] == '\n')
 	{
 		prompt[read_bytes - 1] = '\0'; /* Remove newline character if present */
