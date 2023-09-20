@@ -1,6 +1,13 @@
 #include "lance.h"
 #include "helpers.h"
 
+/* Function prototypes */
+ssize_t read_input_from_stdin(char *prompt, size_t size);
+ssize_t read_input_from_fd(char *prompt, size_t size, int fd);
+ssize_t read_input_from_file(char *prompt, size_t size, FILE *file);
+int is_input_from_pipe(void);
+void handle_eof_condition(FILE *file);
+
 /**
  * _input_processor - Read and process user input.
  *
@@ -21,22 +28,33 @@
 void _input_processor(char *prompt, size_t size, FILE *file, int fd)
 {
 	ssize_t read_bytes;
-	/* File mode: Read from the provided FILE structure */
+
 	if (file != NULL)
 	{
+		/* File mode: Read from the provided FILE structure */
 		read_bytes = read_input_from_file(prompt, size, file);
 	}
-	else if (fd != -1) /* Fd mode: Read from provided fd */
+	else if (fd != -1)
 	{
+		/* File descriptor mode: Read from the provided file descriptor */
 		read_bytes = read_input_from_fd(prompt, size, fd);
 	}
-	else if (is_input_from_pipe()) /* Input from a pipe */
+	else if (is_input_from_pipe())
 	{
+		/* Input coming from a pipe */
 		read_bytes = _read_input_from_pipe(prompt, size);
 	}
-	else /* Interactive mode: Read from stdin */
+	else
 	{
+		/* Interactive mode: Read from stdin */
 		read_bytes = read_input_from_stdin(prompt, size);
+
+		/* Check for EOF (Ctrl+D) condition */
+		if (read_bytes == 0)
+		{
+			handle_eof_condition(file);
+			return; /* No need to process further if EOF is detected */
+		}
 	}
 	if (read_bytes == -1)
 	{
@@ -59,6 +77,35 @@ void _input_processor(char *prompt, size_t size, FILE *file, int fd)
 	if (prompt[read_bytes - 1] == '\n')
 	{
 		prompt[read_bytes - 1] = '\0'; /* Remove newline character if present */
+	}
+}
+
+/**
+ * handle_eof_condition - Handles the end-of-file (EOF) condition.
+ *
+ * This function checks if the input stream is at the end of the file
+ * (EOF) and takes appropriate action based on the input source.
+ *
+ * @file: A pointer to a FILE structure representing the input stream.
+ * If not NULL, the function checks if the input is coming from
+ * this file. If NULL, it checks if the input is coming from stdin.
+ */
+
+void handle_eof_condition(FILE *file)
+{
+	if (file != stdin)
+	{
+		if (file != NULL)
+		{
+			close(fileno(file)); /* Close the file descriptor */
+		}
+		exit(EXIT_SUCCESS);
+	}
+	else
+	{
+		/* Print a message of detection */
+		printf("Ctrl+D detected. Exiting...\n");
+		exit(EXIT_SUCCESS);
 	}
 }
 
