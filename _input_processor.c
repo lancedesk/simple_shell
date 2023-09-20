@@ -181,5 +181,6 @@ ssize_t read_input_from_file(char *prompt, size_t size, FILE *file)
 
 int is_input_from_pipe(void)
 {
-	return (!isatty(fileno(stdin)));
+	return (!isatty(fileno(stdin)) && !isatty(fileno(stdout)));
 }
+

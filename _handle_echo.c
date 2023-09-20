@@ -25,8 +25,7 @@ void _handle_echo(char **prompt_args)
 	{
 		if (i > 1)
 		{
-			/* Print a space between arguments */
-			_putchar(' ');
+			_putchar(' '); /* Print a space between arguments */
 		}
 		/* Print the argument without enclosing double quotes */
 		arg = prompt_args[i];
@@ -57,6 +56,5 @@ void _handle_echo(char **prompt_args)
 			arg++;
 		}
 	}
-	/* Print a newline character at the end */
-	_putchar('\n');
+	_putchar('\n'); /* Print a newline character at the end */
 }

@@ -107,11 +107,13 @@ int _execute_prompt(char *prompt_path, char **prompt_args)
 	else if (pid == 0)
 	{
 		/* Child process */
-		execv(prompt_path, prompt_args);
-		/* If execv returns, there was an error */
-		perror("execv error");
-		free(prompt_path);
-		exit(1);
+		if (execve(prompt_path, prompt_args, environ) == -1)
+		{
+			/* If execve returns, there was an error */
+			perror("execve error\n");
+			free(prompt_path);
+			exit(1);
+		}
 	}
 	else
 	{
@@ -125,10 +127,11 @@ int _execute_prompt(char *prompt_path, char **prompt_args)
 		}
 		else
 		{
-			fprintf(stderr, "Error executing prompt: %s\n", prompt_args[0]);
+			perror("Error executing prompt \n");
 			free(prompt_path);
 			return (0);
 		}
 	}
+	return (0); /* Execution failed */
 }
 
