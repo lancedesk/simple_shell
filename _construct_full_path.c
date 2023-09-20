@@ -18,26 +18,26 @@
 
 char *_construct_full_path(const char *directory, const char *file)
 {
-    char *full_path;
-    size_t dir_len, file_len;
+	char *full_path;
+	size_t dir_len, file_len;
 
-    dir_len = _strlen(directory);
-    file_len = _strlen(file);
+	dir_len = _strlen(directory);
+	file_len = _strlen(file);
 
-    /* Allocate memory for the full path (directory + "/" + file + '\0') */
-    full_path = (char *)malloc(dir_len + file_len + 2);
+	/* Allocate memory for the full path (directory + "/" + file + '\0') */
+	full_path = (char *)malloc(dir_len + file_len + 2);
 
-    if (full_path == NULL)
-    {
-        perror("malloc");
-        return (NULL);
-    }
+	if (full_path == NULL)
+	{
+		perror("malloc");
+		return (NULL);
+	}
 
-    /* Copy the directory and file to the full path */
-    _strcpy(full_path, directory);
-    _strcat(full_path, "/");
-    _strcat(full_path, file);
+	/* Copy the directory and file to the full path */
+	_strcpy(full_path, directory);
+	_strcat(full_path, "/");
+	_strcat(full_path, file);
 
-    return (full_path);
+	return (full_path);
 }
 

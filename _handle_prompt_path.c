@@ -12,18 +12,7 @@ int _execute_prompt(char *prompt_path, char **prompt_args);
 
 void _handle_prompt_path(char **prompt_args)
 {
-	char *path, *prompt_command, *token, *prompt_path;
-
-	prompt_command = prompt_args[0];
-	if (access(prompt_command, X_OK) == 0)
-	{
-		if (_execute_prompt(prompt_command, prompt_args))
-		{
-			return;
-		}
-	}
-
-	path = getenv("PATH");
+	char *path = getenv("PATH"), *token, *prompt_path;
 
 	if (path == NULL)
 	{
@@ -31,22 +20,25 @@ void _handle_prompt_path(char **prompt_args)
 		return;
 	}
 
-	token = _strtok(path, ":");
+	token = strtok(path, ":");
 	while (token != NULL)
 	{
 		prompt_path = NULL;
 
-		if (_search_in_path(prompt_command, &prompt_path, token))
+		/* Check if the prompt_args[0] is a full path or just the executable name */
+		if (_search_in_path(prompt_args[0],
+					&prompt_path, token)
+				|| access(prompt_args[0], X_OK) == 0
+		   )
 		{
-			if (_execute_prompt(prompt_path, prompt_args))
+			if (_execute_prompt(prompt_path ?
+						prompt_path : prompt_args[0], prompt_args)
+			   )
 			{
-				free(prompt_path);
 				return;
 			}
-			free(prompt_path);
 		}
-
-		token = _strtok(NULL, ":");
+		token = strtok(NULL, ":");
 	}
 
 	perror("Prompt not found\n");
@@ -69,7 +61,7 @@ int _search_in_path(const char *prompt, char **prompt_path, const char *token)
 		*prompt_path = strdup(prompt);
 		if (*prompt_path == NULL)
 		{
-			perror("strdup error");
+			perror("strdup error\n");
 			return (0);
 		}
 		return (1);
@@ -79,7 +71,7 @@ int _search_in_path(const char *prompt, char **prompt_path, const char *token)
 
 	if (*prompt_path == NULL)
 	{
-		perror("malloc error");
+		perror("malloc error\n");
 		return (0);
 	}
 
@@ -108,20 +100,18 @@ int _execute_prompt(char *prompt_path, char **prompt_args)
 
 	if (pid < 0)
 	{
-		perror("fork error");
+		perror("fork error\n");
 		free(prompt_path);
 		return (0);
 	}
 	else if (pid == 0)
 	{
 		/* Child process */
-		if (execve(prompt_path, prompt_args, environ) == -1)
-		{
-			/* If execve returns, there was an error */
-			perror("execve error\n");
-			free(prompt_path);
-			exit(1);
-		}
+		execve(prompt_path, prompt_args, environ);
+		/* If execv returns, there was an error */
+		perror("execv error\n");
+		free(prompt_path);
+		exit(1);
 	}
 	else
 	{
@@ -135,11 +125,10 @@ int _execute_prompt(char *prompt_path, char **prompt_args)
 		}
 		else
 		{
-			perror("Error executing prompt \n");
+			perror("Error executing prompt: %s\n");
 			free(prompt_path);
 			return (0);
 		}
 	}
-	return (0); /* Execution failed */
 }
 
