@@ -48,12 +48,6 @@ void _input_processor(char *prompt, size_t size, FILE *file, int fd)
 	{
 		/* Interactive mode: Read from stdin */
 		read_bytes = read_input_from_stdin(prompt, size);
-
-		/* Check for EOF (Ctrl+D) condition */
-		if (read_bytes == -1)
-		{
-			handle_eof_condition();
-		}
 	}
 	if (read_bytes == -1)
 	{
@@ -77,23 +71,6 @@ void _input_processor(char *prompt, size_t size, FILE *file, int fd)
 	{
 		prompt[read_bytes - 1] = '\0'; /* Remove newline character if present */
 	}
-}
-
-/**
- * handle_eof_condition - Handles the end-of-file (EOF) condition.
- *
- * This function checks if the input stream is at the end of the file
- * (EOF) and takes appropriate action based on the input source.
- *
- * @file: A pointer to a FILE structure representing the input stream.
- * If not NULL, the function checks if the input is coming from
- * this file. If NULL, it checks if the input is coming from stdin.
- */
-
-void handle_eof_condition(void)
-{
-	_putchar('\n'); /* Handle end of file (Ctrl+D) */
-	return; /* No need to process further if EOF is detected */
 }
 
 /**
