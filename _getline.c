@@ -39,7 +39,6 @@ ssize_t _getline(char **buffer, size_t *size)
 		{
 			*size *= 2;  /* Resize the buffer if necessary */
 			*buffer = realloc(*buffer, *size);
-
 			if (*buffer == NULL)
 			{
 				perror("Memory allocation failed");
