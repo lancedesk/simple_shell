@@ -6,7 +6,7 @@ ssize_t read_input_from_stdin(char *prompt, size_t size);
 ssize_t read_input_from_fd(char *prompt, size_t size, int fd);
 ssize_t read_input_from_file(char *prompt, size_t size, FILE *file);
 int is_input_from_pipe(void);
-void handle_eof_condition(FILE *file);
+void handle_eof_condition(void);
 
 /**
  * _input_processor - Read and process user input.
@@ -50,10 +50,9 @@ void _input_processor(char *prompt, size_t size, FILE *file, int fd)
 		read_bytes = read_input_from_stdin(prompt, size);
 
 		/* Check for EOF (Ctrl+D) condition */
-		if (read_bytes == 0)
+		if (read_bytes == -1)
 		{
-			handle_eof_condition(file);
-			return; /* No need to process further if EOF is detected */
+			handle_eof_condition();
 		}
 	}
 	if (read_bytes == -1)
@@ -91,22 +90,10 @@ void _input_processor(char *prompt, size_t size, FILE *file, int fd)
  * this file. If NULL, it checks if the input is coming from stdin.
  */
 
-void handle_eof_condition(FILE *file)
+void handle_eof_condition(void)
 {
-	if (file != stdin)
-	{
-		if (file != NULL)
-		{
-			close(fileno(file)); /* Close the file descriptor */
-		}
-		exit(EXIT_SUCCESS);
-	}
-	else
-	{
-		/* Print a message of detection */
-		printf("Ctrl+D detected. Exiting...\n");
-		exit(EXIT_SUCCESS);
-	}
+	_putchar('\n'); /* Handle end of file (Ctrl+D) */
+	return; /* No need to process further if EOF is detected */
 }
 
 /**
