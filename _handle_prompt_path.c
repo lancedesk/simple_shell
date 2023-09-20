@@ -12,36 +12,44 @@ int _execute_prompt(char *prompt_path, char **prompt_args);
 
 void _handle_prompt_path(char **prompt_args)
 {
-	char *path = getenv("PATH"), *token, *prompt_path;
+	char *path, *prompt_command, *token, *prompt_path;
+
+	prompt_command = prompt_args[0];
+	if (access(prompt_command, X_OK) == 0)
+	{
+		if (_execute_prompt(prompt_command, prompt_args))
+		{
+			return;
+		}
+	}
+
+	path = getenv("PATH");
 
 	if (path == NULL)
 	{
-		fprintf(stderr, "PATH environment variable is not set.\n");
+		perror("PATH environment variable is not set.\n");
 		return;
 	}
 
-	token = strtok(path, ":");
+	token = _strtok(path, ":");
 	while (token != NULL)
 	{
 		prompt_path = NULL;
 
-		/* Check if the prompt_args[0] is a full path or just the executable name */
-		if (_search_in_path(prompt_args[0],
-					&prompt_path, token)
-				|| access(prompt_args[0], X_OK) == 0
-		   )
+		if (_search_in_path(prompt_command, &prompt_path, token))
 		{
-			if (_execute_prompt(prompt_path ?
-						prompt_path : prompt_args[0], prompt_args)
-			   )
+			if (_execute_prompt(prompt_path, prompt_args))
 			{
+				free(prompt_path);
 				return;
 			}
+			free(prompt_path);
 		}
-		token = strtok(NULL, ":");
+
+		token = _strtok(NULL, ":");
 	}
 
-	fprintf(stderr, "%s: prompt not found\n", prompt_args[0]);
+	perror("Prompt not found\n");
 }
 
 /**
