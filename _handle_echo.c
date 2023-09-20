@@ -18,7 +18,8 @@
 
 void _handle_echo(char **prompt_args)
 {
-	int i;
+	int i, inside_quotes;
+	char *arg;
 
 	for (i = 1; prompt_args[i] != NULL; i++)
 	{
@@ -27,11 +28,33 @@ void _handle_echo(char **prompt_args)
 			/* Print a space between arguments */
 			_putchar(' ');
 		}
-		/* Print the argument */
-		while (*prompt_args[i])
+		/* Print the argument without enclosing double quotes */
+		arg = prompt_args[i];
+		inside_quotes = 0;
+
+		while (*arg)
 		{
-			_putchar(*prompt_args[i]);
-			prompt_args[i]++;
+			if (*arg == '"')
+			{
+				inside_quotes = !inside_quotes;
+			}
+			else if (*arg == '\\' && inside_quotes)
+			{
+				arg++;  /* Skip the escape character '\' */
+				if (*arg == 'n')
+				{
+					_putchar('\n');  /* Interpret '\n' as newline */
+				}
+				else
+				{
+					_putchar(*arg);
+				}
+			}
+			else
+			{
+				_putchar(*arg);
+			}
+			arg++;
 		}
 	}
 	/* Print a newline character at the end */
