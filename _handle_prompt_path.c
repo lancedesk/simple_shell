@@ -67,14 +67,13 @@ int _search_in_path(const char *prompt, char **prompt_path, const char *token)
 		return (1);
 	}
 
-	*prompt_path = malloc(_strlen(token) + _strlen(prompt) + 2);
+	*prompt_path = _construct_full_path(token, prompt);
 
 	if (*prompt_path == NULL)
 	{
 		perror("malloc error");
 		return (0);
 	}
-	sprintf(*prompt_path, "%s/%s", token, prompt);
 
 	if (access(*prompt_path, X_OK) == 0)
 	{
@@ -132,3 +131,4 @@ int _execute_prompt(char *prompt_path, char **prompt_args)
 		}
 	}
 }
+

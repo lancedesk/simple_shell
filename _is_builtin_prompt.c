@@ -24,7 +24,6 @@ int _is_builtin_prompt(const char *prompt)
 	/* List of built-in prompts */
 	const char *builtin_prompts[] = {
 		"clear",
-		"ls",
 		"exit",
 		"env",
 		"cd",
@@ -49,3 +48,4 @@ int _is_builtin_prompt(const char *prompt)
 	/* Prompt is not a built-in prompt */
 	return (0);
 }
+

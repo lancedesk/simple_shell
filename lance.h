@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include <stdbool.h>
 
+char *_strcat(char *dest, const char *src);
 void _puts(const char *str);
 int _putchar(char c);
 ssize_t _getline(char **buffer, size_t *size);
@@ -34,5 +35,6 @@ void _mode_file(const char *filename);
 void _mode_interactive(void);
 
 #endif
+
 
 

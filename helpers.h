@@ -28,7 +28,6 @@ void _handle_path(char **prompt_args);
 void _handle_pwd(char **prompt_args);
 void _handle_setenv(char **prompt_args);
 void _handle_unsetenv(char **prompt_args);
-void _handle_ls(char **prompt_args);
 void _handle_clear(char **prompt_args);
 void _handle_echo(char **prompt_args);
 
@@ -79,6 +78,9 @@ ssize_t read_input_from_file(char *prompt, size_t size, FILE *file);
 ssize_t _read_input_from_pipe(char *prompt, size_t size);
 int is_input_from_pipe(void);
 
+char *_construct_full_path(const char *directory, const char *file);
+
 #endif
+
 
 

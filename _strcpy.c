@@ -13,6 +13,12 @@ char *_strcpy(char *dest, const char *src)
 {
 	char *original_dest;
 
+	if (dest == NULL || src == NULL)
+	{
+		/* Return NULL if src || dest is NULL */
+		return (NULL);
+	}
+
 	/* Store the original destination pointer */
 	original_dest = dest;
 
@@ -27,3 +33,4 @@ char *_strcpy(char *dest, const char *src)
 	/* of the destination string */
 	return (original_dest);
 }
+

@@ -26,6 +26,11 @@ int _strcmp(const char *strn1, const char *strn2)
 {
 	int result, strn1_result, strn2_result;
 
+	if (strn1 == NULL || strn2 == NULL)
+	{
+		return (-1);
+	}
+
 	while (*strn1 && (*strn1 == *strn2))
 	{
 		strn1++;
@@ -35,6 +40,7 @@ int _strcmp(const char *strn1, const char *strn2)
 	strn1_result = *(unsigned char *)strn1;
 	strn2_result = *(unsigned char *)strn2;
 
-	result =  strn1_result - strn2_result;
+	result = strn1_result - strn2_result;
 	return (result);
 }
+

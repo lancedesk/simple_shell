@@ -33,7 +33,6 @@ void _inbuilt_prompts(char **prompt_args)
 		"setenv",
 		"unsetenv",
 		"alias",
-		"ls",
 		"clear",
 		"echo",
 		NULL /* NULL-terminated array */
@@ -93,14 +92,12 @@ void _call_builtin_handler(int index, char **prompt_args)
 			_handle_alias(prompt_args);
 			break;
 		case 8:
-			_handle_ls(prompt_args);
-			break;
-		case 9:
 			_handle_clear(prompt_args);
 			break;
-		case 10:
+		case 9:
 			_handle_echo(prompt_args);
 			break;
 	}
 }
+
 

@@ -12,6 +12,11 @@ size_t _strlen(const char *str)
 {
 	size_t length = 0;
 
+	if (str == NULL)
+	{
+		return (0);
+	}
+
 	while (str[length] != '\0')
 	{
 		length++;
@@ -19,3 +24,5 @@ size_t _strlen(const char *str)
 
 	return (length);
 }
+
+
