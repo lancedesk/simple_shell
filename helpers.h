@@ -15,8 +15,7 @@ extern char **environ;
 
 int count_tokens(const char *str);
 char **copy_tokens(const char *str, int count);
-char *read_input(size_t *length, size_t *max_length);
-char *allocate_input_buffer(size_t *size);
+char *read_input(void);
 void free_input_buffer(char *buffer);
 char *_strip_whitespace(const char *str);
 
@@ -81,6 +80,7 @@ char *_construct_full_path(const char *directory, const char *file);
 
 /* extern char **environ; */
 #endif
+
 
 
 

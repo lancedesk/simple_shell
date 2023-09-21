@@ -2,61 +2,31 @@
 #include "helpers.h"
 
 /**
- * read_input - Reads and allocates memory
- * for user input.
+ * read_input - Reads and allocates memory for user input using getline.
  *
- * @length: A pointer to a size_t variable
- * representing the length of the input string.
- *
- * @max_length: A pointer to a size_t variable
- * ( maximum allocated length of input buffer.
- * This value may be increased as needed
- * to accommodate longer input.
- *
- * Return: A dynamically allocated character buffer
- * containing the user input
+ * Return: A dynamically allocated character buffer containing user input.
+ * This buffer is automatically resized by getline as needed.
  */
 
-char *read_input(size_t *length, size_t *max_length)
+char *read_input(void)
 {
-	int c;
-	char *input = NULL, *temp;
-	size_t i;
+	char *input = NULL;
+	size_t size = 0;
 
-	/* Initialize max_length */
-	*max_length = INITIAL_MAX_LENGTH;
+	ssize_t bytes_read = getline(&input, &size, stdin);
 
-	/* Allocate memory for the input buffer */
-	/* using the new function */
-	input = allocate_input_buffer(max_length);
-
-	/* Initialize length */
-	*length = 0;
-
-	while ((c = _getchar()) != '\n' && c != EOF)
+	if (bytes_read == -1)
 	{
-		if (*length >= *max_length - 1)
-		{
-			/* Double the buffer size */
-			*max_length *= 2;
-			temp = allocate_input_buffer(max_length);
-
-			/* Copy data from old buffer to new one */
-			for (i = 0; i < *length; i++)
-			{
-				temp[i] = input[i];
-			}
-
-			/* Free the old buffer */
-			free_input_buffer(input);
-			input = temp;
-		}
-		input[(*length)++] = (char)c;
+		perror("Error reading input");
+		free(input); /* Free the buffer if an error occurs */
+		return (NULL);
 	}
 
-	/* Null-terminate the input string */
-	input[*length] = '\0';
+	/* Remove the newline character at the end, if it exists */
+	if (bytes_read > 0 && input[bytes_read - 1] == '\n')
+	{
+		input[bytes_read - 1] = '\0';
+	}
 
-	/* Return the dynamically allocated buffer */
 	return (input);
 }
