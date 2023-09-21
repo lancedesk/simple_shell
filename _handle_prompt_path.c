@@ -12,7 +12,7 @@ int _execute_prompt(char *prompt_path, char **prompt_args);
 
 void _handle_prompt_path(char **prompt_args)
 {
-	char *path = getenv("PATH"), *token, *prompt_path;
+	char *path = _getenv("PATH"), *token, *prompt_path;
 
 	if (path == NULL)
 	{

@@ -12,22 +12,25 @@
 
 int _handle_comments(char **prompt_args)
 {
-	int i;
-	char *comment_pos, *arg;
+	int i, j;
+	char *arg;
 
 	/* Iterate through the arguments */
 	for (i = 0; prompt_args[i] != NULL; i++)
 	{
 		arg = prompt_args[i];
-		comment_pos = strchr(arg, '#');  /* Find '#' char */
 
-		if (comment_pos != NULL)
+		/* Iterate through the characters in the argument */
+		for (j = 0; arg[j] != '\0'; j++)
 		{
-			/* If '#' char found, terminate the argument before '#' */
-			*comment_pos = '\0';
-
-			/* Indicate that the line contains a comment */
-			return (1);
+			if (arg[j] == '#')
+			{
+				/* If '#' char found, terminate the argument */
+				/* before '#' */
+				arg[j] = '\0';
+				/* Indicate that the line contains a comment */
+				return (1);
+			}
 		}
 	}
 

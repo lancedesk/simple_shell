@@ -42,7 +42,6 @@ void _handle_logical_or(char **prompt_args);
 void _handle_logical_operators(char **prompt_args);
 
 void _execute_single_prompt(char **prompt_args);
-char *_path_basename(char *path);
 void _expand_env_variables(char *prompt);
 
 /**
@@ -80,6 +79,7 @@ int is_input_from_pipe(void);
 
 char *_construct_full_path(const char *directory, const char *file);
 
+extern char **environ;
 #endif
 
 

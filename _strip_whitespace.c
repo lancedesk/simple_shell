@@ -8,7 +8,7 @@
  * @str: The string to be stripped of whitespace.
  * Return: A new dynamically allocated string
  * with leading and trailing whitespace removed.
-*/
+ */
 
 char *_strip_whitespace(const char *str)
 {
@@ -19,18 +19,18 @@ char *_strip_whitespace(const char *str)
 		return (NULL);
 
 	/* Find the length of the string */
-	len = strlen(str);
+	len = _strlen(str);
 
 	/* Initialize indices for the start */
 	/* and end of the new string */
 	start = 0, end = len - 1;
 
 	/* Skip leading whitespace */
-	while (start < len && isspace(str[start]))
+	while (start < len && _isspace(str[start]))
 		start++;
 
 	/* Skip trailing whitespace */
-	while (end > start && isspace(str[end]))
+	while (end > start && _isspace(str[end]))
 		end--;
 
 	/* Calculate the length of the new string */
@@ -47,7 +47,7 @@ char *_strip_whitespace(const char *str)
 	}
 
 	/* Copy the stripped string into the new buffer */
-	strncpy(new_str, &str[start], new_len);
+	_strncpy(new_str, &str[start], new_len);
 
 	/* Null-terminate the new string */
 	new_str[new_len] = '\0';

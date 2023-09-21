@@ -10,6 +10,7 @@
  * @prompt_args: An array of command arguments.
  * @status: The status of the last command executed.
  */
+
 void _handle_dollar(char **prompt_args, int status)
 {
 	int i;
@@ -24,22 +25,22 @@ void _handle_dollar(char **prompt_args, int status)
 			{
 				/* Replacing $? */
 				/* The status of the last command executed */
-				printf("%d\n", status);
+				_putchar(status);
 			}
 			else if (_strcmp(arg, "$$") == 0)
 			{
 				/* Replacing $$ */
 				/* The process ID of the shell */
-				printf("%d\n", getpid());
+				_putchar(getpid());
 			}
 			else if (_strcmp(arg, "$PATH") == 0)
 			{
 				/* $PATH replaced with the current PATH */
 				/* environment variable */
-				path = getenv("PATH");
+				path = _getenv("PATH");
 				if (path != NULL)
 				{
-					printf("%s\n", path);
+					_puts(path);
 				}
 			}
 			else

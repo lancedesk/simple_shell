@@ -33,7 +33,7 @@ char *read_input(size_t *length, size_t *max_length)
 	/* Initialize length */
 	*length = 0;
 
-	while ((c = getchar()) != '\n' && c != EOF)
+	while ((c = _getchar()) != '\n' && c != EOF)
 	{
 		if (*length >= *max_length - 1)
 		{

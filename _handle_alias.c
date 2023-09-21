@@ -37,12 +37,13 @@ void _handle_alias(char **prompt_args)
 		if (alias != NULL)
 		{
 			/* Print the alias without single quotes */
-			printf("%s %s\n", alias->name, alias->value);
+			_puts(alias->name);
+			_puts(alias->value);
 		}
 		else
 		{
 			/* Alias not found */
-			printf("Alias '%s' not found.\n", name);
+			_puts("Alias not found.");
 		}
 	}
 	else
@@ -112,7 +113,8 @@ void _print_all_aliases(void)
 	{
 		if (aliases[i].name != NULL)
 		{
-			printf("%s %s\n", aliases[i].name, aliases[i].value);
+			_puts(aliases[i].name);
+				_puts(aliases[i].value);
 		}
 	}
 }

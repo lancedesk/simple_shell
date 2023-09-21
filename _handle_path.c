@@ -19,7 +19,7 @@ void _handle_path(char **prompt_args)
 	{
 		/* Get and print the current PATH */
 		/* environment variable */
-		char *path = getenv("PATH");
+		char *path = _getenv("PATH");
 
 		if (path != NULL)
 		{

@@ -15,6 +15,11 @@
 #include <fcntl.h>
 #include <stdbool.h>
 
+int _setenv(const char *name, const char *value, int overwrite);
+char *_getenv(const char *name);
+int _getchar(void);
+bool _isspace(int c);
+char *_strncpy(char *dest, const char *src, size_t n);
 char *_strcat(char *dest, const char *src);
 void _puts(const char *str);
 int _putchar(char c);

@@ -22,12 +22,12 @@ void _handle_cd(char **prompt_args)
 		if (arg1 == NULL || _strcmp(arg1, "~") == 0)
 		{
 			/* No arg or "~" provided, change to home dir */
-			new_dir = getenv("HOME");
+			new_dir = _getenv("HOME");
 		}
 		else if (_strcmp(arg1, "-") == 0)
 		{
 			/* Handle "cd -" to switch to the previous dir */
-			new_dir = getenv("OLDPWD");
+			new_dir = _getenv("OLDPWD");
 		}
 		else
 		{
@@ -37,16 +37,16 @@ void _handle_cd(char **prompt_args)
 		{
 			if (chdir(new_dir) == -1)
 			{
-				perror("cd error");
+				perror("cd error\n");
 			}
 			else
 			{
 				/* Update the PWD environment variable */
-				setenv("PWD", new_dir, 1);
+				_setenv("PWD", new_dir, 1);
 				/* Print the new working directory */
 				/* printf("Changed directory to %s\n", new_dir); */
 				/* Update the OLDPWD environment variable */
-				setenv("OLDPWD", getenv("PWD"), 1);
+				_setenv("OLDPWD", _getenv("PWD"), 1);
 			}
 		}
 		else
