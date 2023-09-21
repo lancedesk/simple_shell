@@ -1,4 +1,8 @@
 #include "lance.h"
+#include <stdlib.h>
+
+static char *_find_env_variable(const char *str);
+static int _expand_single_env_variable(char *var_name_start);
 
 /**
  * _expand_env_variables - Replace environment variables
@@ -16,43 +20,102 @@
 
 void _expand_env_variables(char *prompt)
 {
-	char *dollar_sign, *var, *val, *var_name;
-	size_t var_len, val_len;
+	char *var_name_start;
 
-	/* Find the first occurrence of '$' in the prompt */
-	while ((dollar_sign = strchr(prompt, '$')) != NULL)
+	while ((var_name_start = _find_env_variable(prompt)) != NULL)
 	{
-		/* Find the end of the variable name */
-		/* (e.g., the first space or character */
-		/* that's not valid in a variable name) */
-		var = dollar_sign + 1;
-
-		while (*var != '\0' && *var != ' ' && *var != '$')
+		if (!_expand_single_env_variable(var_name_start))
 		{
-			var++;
+			/* Variable not found, move to the next character */
+			prompt = var_name_start + 1;
 		}
-		/* A substring for the variable name */
-		var_len = var - (dollar_sign + 1);
-
-		/* Allocate memory dynamically for var_name */
-		var_name = (char *)malloc(var_len + 1);
-
-		if (var_name == NULL)
-		{
-			/* Handle memory allocation failure */
-			exit(EXIT_FAILURE);
-		}
-		strncpy(var_name, dollar_sign + 1, var_len);
-		var_name[var_len] = '\0';
-		/* Get the value of the environment variable */
-		val = getenv(var_name);
-		/* Replace the variable with its value in the prompt */
-		if (val != NULL)
-		{
-			val_len = strlen(val);
-			memmove(dollar_sign + val_len, var, _strlen(var) + 1);
-			memcpy(dollar_sign, val, val_len);
-		}
-		free(var_name);
 	}
 }
+
+/**
+ * _find_env_variable - Find an environment variable within a string.
+ *
+ * This function searches for the first occurrence of an environment
+ * variable enclosed in '$' symbols in the given string `str`.
+ * It returns a pointer to the variable name if found, or NULL otherwise.
+ *
+ * @str: The string to search for environment variables.
+ *
+ * Return: A pointer to the start of the variable name if found, or NULL.
+ */
+
+static char *_find_env_variable(const char *str)
+{
+	char *dollar_sign, *var_start, *var_end;
+
+	dollar_sign = _strchr(str, '$');
+	if (dollar_sign == NULL)
+	{
+		return (NULL);
+	}
+
+	var_start = dollar_sign + 1;
+	var_end = var_start;
+
+	while (*var_end != '\0' && *var_end != ' ' && *var_end != '$')
+	{
+		var_end++;
+	}
+
+	if (var_start != var_end)
+	{
+		return (var_start);
+	}
+	return (NULL);
+}
+
+/**
+ * _expand_single_env_variable - Replace a single environment variable
+ * with its value in a string.
+ *
+ * This function takes a pointer to the start of a variable name in a string
+ * and replaces it with its corresponding value from the system environment.
+ * It modifies the string in-place.
+ *
+ * @var_name_start: A pointer to the start of the variable
+ * name in the string.
+ *
+ * Return: 1 if a replacement was made, 0 otherwise.
+ */
+
+static int _expand_single_env_variable(char *var_name_start)
+{
+	size_t var_len;
+	char *var_end = var_name_start, *var_name, *val;
+
+	while (*var_end != '\0' && *var_end != ' ' && *var_end != '$')
+	{
+		var_end++;
+	}
+
+	var_len = var_end - var_name_start;
+	var_name = (char *)malloc(var_len + 1);
+
+	if (var_name == NULL)
+	{
+		/* Handle memory allocation failure */
+		exit(EXIT_FAILURE);
+	}
+
+	_strncpy(var_name, var_name_start, var_len);
+	var_name[var_len] = '\0';
+
+	val = _getenv(var_name);
+
+	if (val != NULL)
+	{
+		_strcpy(var_name_start, val);
+		_strcat(var_name_start, var_end);
+		free(var_name);
+		return (1); /* Variable replaced */
+	}
+
+	free(var_name);
+	return (0); /* Variable not replaced */
+}
+

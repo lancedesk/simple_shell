@@ -15,6 +15,7 @@
 #include <fcntl.h>
 #include <stdbool.h>
 
+char *_strchr(const char *str, int c);
 int _setenv(const char *name, const char *value, int overwrite);
 char *_getenv(const char *name);
 int _getchar(void);
