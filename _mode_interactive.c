@@ -18,7 +18,6 @@ void _handle_eof_condition(void);
 void _mode_interactive(void)
 {
 	char *prompt = NULL;
-	size_t size = 0, max_size = 0;
 
 	/*  Check if stdin is associated with a terminal */
 	bool is_terminal = isatty(STDIN_FILENO);
@@ -31,7 +30,7 @@ void _mode_interactive(void)
 			_prompter();
 		}
 
-		prompt = read_input(&size, &max_size);
+		prompt = read_input();
 
 		/* Check for EOF (Ctrl+D) condition */
 		if (prompt == NULL || _strlen(prompt) == 0)
@@ -62,3 +61,4 @@ void _handle_eof_condition(void)
 	_putchar('\n'); /* Handle end of file (Ctrl+D) */
 	return; /* No need to process further if EOF is detected */
 }
+
