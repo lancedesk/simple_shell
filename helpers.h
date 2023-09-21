@@ -79,7 +79,7 @@ int is_input_from_pipe(void);
 
 char *_construct_full_path(const char *directory, const char *file);
 
-extern char **environ;
+/* extern char **environ; */
 #endif
 
 

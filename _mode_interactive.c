@@ -20,9 +20,17 @@ void _mode_interactive(void)
 	char *prompt = NULL;
 	size_t size = 0, max_size = 0;
 
+	/*  Check if stdin is associated with a terminal */
+	bool is_terminal = isatty(STDIN_FILENO);
+
 	while (1)
 	{
-		_prompter();
+		if (is_terminal)
+		{
+			/* Only call _prompter() if input is from a terminal */
+			_prompter();
+		}
+
 		prompt = read_input(&size, &max_size);
 
 		/* Check for EOF (Ctrl+D) condition */
@@ -54,6 +62,3 @@ void _handle_eof_condition(void)
 	_putchar('\n'); /* Handle end of file (Ctrl+D) */
 	return; /* No need to process further if EOF is detected */
 }
-
-
-
