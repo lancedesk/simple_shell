@@ -20,42 +20,37 @@ ssize_t _getline(char **buffer, size_t *size)
 
 	if (_validate_input_parameters(buffer, size) != 0)
 	{
-		return (-1);  /* Invalid input */
+		return (-1); /* Invalid input */
 	}
 	if (_initialize_buffer_if_needed(buffer, size) != 0)
 	{
-		return (-1);  /* Initialization error */
+		return (-1); /* Initialization error */
 	}
 	while (1)
 	{
 		bytes_read = read(STDIN_FILENO, &c, 1);
 		if (bytes_read <= 0)
 		{
-			break;  /* Error or EOF */
+			break; /* Error or EOF */
 		}
 		(*buffer)[total_bytes_read] = c;
 		total_bytes_read++;
 		if ((size_t)total_bytes_read >= *size)
 		{
-			*size *= 2;  /* Resize the buffer if necessary */
-			*buffer = realloc(*buffer, *size);
-			if (*buffer == NULL)
-			{
-				perror("Memory allocation failed");
-				return (-1);  /* Allocation failure */
-			}
+			perror("Buffer size exceeded");
+			return (-1); /* Buffer size exceeded */
 		}
 		if (c == '\n')
 		{
-			(*buffer)[total_bytes_read] = '\0';  /* EOL - Null-terminate the string */
+			(*buffer)[total_bytes_read] = '\0'; /* EOL - Null-terminate the string */
 			return (total_bytes_read);
 		}
 	}
 	if (bytes_read == 0 && total_bytes_read == 0)
 	{
-		return (-2);  /* EOF reached */
+		return (-2); /* EOF reached */
 	}
-	return (-1);  /* Error */
+	return (-1); /* Error */
 }
 
 /**
@@ -66,7 +61,6 @@ ssize_t _getline(char **buffer, size_t *size)
  *
  * Return: 0 for valid input, -1 for invalid input.
  */
-
 int _validate_input_parameters(char **buffer, size_t *size)
 {
 	if (!buffer || !size)
@@ -85,7 +79,6 @@ int _validate_input_parameters(char **buffer, size_t *size)
  *
  * Return: 0 for success, -1 for failure.
  */
-
 int _initialize_buffer_if_needed(char **buffer, size_t *size)
 {
 	if (*buffer == NULL || *size == 0)
@@ -97,9 +90,9 @@ int _initialize_buffer_if_needed(char **buffer, size_t *size)
 		if (*buffer == NULL)
 		{
 			perror("Memory allocation failed");
-			return (-1);  /* Allocation failure  */
+			return (-1); /* Allocation failure */
 		}
 	}
-	return (0);  /* Success */
+	return (0); /* Success */
 }
 
