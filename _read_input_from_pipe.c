@@ -25,6 +25,8 @@ ssize_t _read_input_from_pipe(char *prompt, size_t size)
 	if (read_bytes == -1)
 	{
 		perror("Error reading input from pipe...\n");
+		/* Return an exit status of 2 to indicate an error */
+		return (2);
 	}
 
 	return (read_bytes);

@@ -89,7 +89,6 @@ void _input_processor(char *prompt, size_t size, FILE *file, int fd)
 
 ssize_t read_input_from_stdin(char *prompt, size_t size)
 {
-	_printer("Lance-Shell$ "); /* Interactive mode: Print shell prompt */
 	return (_getline(&prompt, &size));
 }
 
