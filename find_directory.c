@@ -12,40 +12,40 @@
  *
  * Return: If found, a dynamically allocated string
  * containing the full path to the command; otherwise, NULL.
-*/
+ */
 
 char *find_directory(char *command)
 {
-  char *path = getenv("PATH");
-  char *directory = NULL;
-  char *full_path = NULL;
+	char *path = getenv("PATH");
+	char *directory = NULL;
+	char *full_path = NULL;
 
-  if (command == NULL)
-  {
+	if (command == NULL)
+	{
+		return (NULL);
+	}
+
+	while ((directory = strtok(path, ":")) != NULL)
+	{
+		/*  +2 for '/' and '\0' */
+		full_path = (char *)malloc(strlen(directory) + strlen(command) + 2); 
+		if (full_path == NULL)
+		{
+			perror("malloc");
+			exit(1);
+		}
+
+		sprintf(full_path, "%s/%s", directory, command);
+
+		if (access(full_path, F_OK) == 0)
+		{
+			return (full_path);
+		}
+
+		free(full_path); /*  Free the memory if file is not found. */
+		full_path = NULL;
+		path = NULL;
+	}
+
 	return (NULL);
-  }
-
-  while ((directory = strtok(path, ":")) != NULL)
-  {
-	/*  +2 for '/' and '\0' */
-	full_path = (char *)malloc(strlen(directory) + strlen(command) + 2); 
-	if (full_path == NULL)
-	{
-	  perror("malloc");
-	  exit(1);
-	}
-
-	sprintf(full_path, "%s/%s", directory, command);
-
-	if (access(full_path, F_OK) == 0)
-	{
-	  return (full_path);
-	}
-
-	free(full_path); /*  Free the memory if file is not found. */
-	full_path = NULL;
-	path = NULL;
-  }
-
-  return (NULL);
 }

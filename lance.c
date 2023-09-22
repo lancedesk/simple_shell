@@ -5,10 +5,10 @@
  */
 void print_prompt(int is_interactive)
 {
-    if (is_interactive)
+	if (is_interactive)
 	{
-        _printer("ldshell> ");
-    }
+		_printer("ldshell> ");
+	}
 }
 
 /**
@@ -16,22 +16,22 @@ void print_prompt(int is_interactive)
  */
 char *read_input(size_t *input_size)
 {
-    char *input = NULL;
-    ssize_t result;
+	char *input = NULL;
+	ssize_t result;
 
-    result = getline(&input, input_size, stdin);
+	result = getline(&input, input_size, stdin);
 
-    if (result == -1 || is_input_empty(input))
+	if (result == -1 || is_input_empty(input))
 	{
-        if (input != NULL)
+		if (input != NULL)
 		{
-            free(input); /* Free the memory allocated by getline. */
-        }
-        handle_ctrl_d();
-    }
+			free(input); /* Free the memory allocated by getline. */
+		}
+		handle_ctrl_d();
+	}
 
-    input[strlen(input) - 1] = '\0';
-    return (input);
+	input[strlen(input) - 1] = '\0';
+	return (input);
 }
 
 /**
@@ -39,69 +39,69 @@ char *read_input(size_t *input_size)
  */
 char **split_input(char *input, int argc)
 {
-    char *command = strtok(input, " ");
+	char *command = strtok(input, " ");
 	/* +1 for NULL terminator */
-    char **args = malloc(sizeof(char *) * (argc + 1));
+	char **args = malloc(sizeof(char *) * (argc + 1));
 	int i;
 
-    if (args == NULL)
+	if (args == NULL)
 	{
-        perror("Failed to allocate memory for arguments.\n");
-        exit(1);
-    }
+		perror("Failed to allocate memory for arguments.\n");
+		exit(1);
+	}
 
-    i = 0;
-    while (command != NULL)
+	i = 0;
+	while (command != NULL)
 	{
-        args[i] = command;
-        command = strtok(NULL, " ");
-        i++;
-    }
+		args[i] = command;
+		command = strtok(NULL, " ");
+		i++;
+	}
 
-    args[i] = NULL;
-    return (args);
+	args[i] = NULL;
+	return (args);
 }
 
 int main(int argc, char **argv)
 {
-    char *input = NULL;
-    int is_interactive;
-    size_t input_size = 0;
-    int status;
+	char *input = NULL;
+	int is_interactive;
+	size_t input_size = 0;
+	int status;
 	char **args = NULL;
 
-    signal(SIGINT, SIG_IGN);
+	signal(SIGINT, SIG_IGN);
 
-    is_interactive = isatty(fileno(stdin));
+	is_interactive = isatty(fileno(stdin));
 
-    while (1)
+	while (1)
 	{
-        print_prompt(is_interactive);
+		print_prompt(is_interactive);
 
-        if (input != NULL)
+		if (input != NULL)
 		{
-            free(input);
-            input = NULL;
-        }
+			free(input);
+			input = NULL;
+		}
 
-        input = read_input(&input_size);
+		input = read_input(&input_size);
 
-        if (strcmp(input, "exit") == 0)
+		if (strcmp(input, "exit") == 0)
 		{
-            free(input);
-            exit_shell();
-        }
+			free(input);
+			exit_shell();
+		}
 
-        args = split_input(input, argc);
-        status = execute_command(args[0], args, is_interactive, argv[0]);
-        free(args);
+		args = split_input(input, argc);
+		status = execute_command(args[0], args, is_interactive, argv[0]);
+		free(args);
 
-        if (is_interactive && status != 0) {
-            /* perror("Command failed"); */
-        }
-    }
+		if (is_interactive && status != 0) {
+			/* perror("Command failed"); */
+		}
+	}
 	/* Free the memory allocated for the input. */
 	free(input);
 
-    return (0);
+	return (0);
 }
