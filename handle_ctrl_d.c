@@ -8,13 +8,13 @@
  * or by doing nothing, depending on whether
  * input is from a pipe or
  * terminal.
-*/
+ */
 
 void handle_ctrl_d(void)
 {
 	if (!isatty(fileno(stdin)))
 	{
-	/*  Input is from a pipe, so don't print a newline character. */
+		/*  Input is from a pipe, so don't print a newline character. */
 	}
 	else
 	{

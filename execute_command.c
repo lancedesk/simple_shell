@@ -21,27 +21,27 @@ void handle_execution_error(char *command, char *program_name);
 
 int execute_command(char *command, char **args, int is_interactive, char *program_name)
 {
-    pid_t pid = fork();
-    int result, status;
-    
-    if (command == NULL)
-    {
-        return (1);
-    }
-    
-    if (pid == 0)
-    {
-        /* Child process. */
-        result = execute_child_command(command, args, program_name);
-        free(args);
-        exit(result);
-    }
-    else
-    {
-        /* Parent process. */
-        status = wait_for_child(pid, is_interactive);
-        return (status);
-    }
+	pid_t pid = fork();
+	int result, status;
+
+	if (command == NULL)
+	{
+		return (1);
+	}
+
+	if (pid == 0)
+	{
+		/* Child process. */
+		result = execute_child_command(command, args, program_name);
+		free(args);
+		exit(result);
+	}
+	else
+	{
+		/* Parent process. */
+		status = wait_for_child(pid, is_interactive);
+		return (status);
+	}
 }
 
 /**
@@ -57,16 +57,16 @@ int execute_command(char *command, char **args, int is_interactive, char *progra
  */
 int wait_for_child(pid_t pid, int is_interactive)
 {
-    int status;
+	int status;
 
-    waitpid(pid, &status, WUNTRACED);
-    
-    if (is_interactive)
-    {
-        return (status);
-    }
-    
-    return (0);
+	waitpid(pid, &status, WUNTRACED);
+
+	if (is_interactive)
+	{
+		return (status);
+	}
+
+	return (0);
 }
 
 /**
@@ -84,26 +84,26 @@ int wait_for_child(pid_t pid, int is_interactive)
  */
 int execute_child_command(char *command, char **args, char *program_name)
 {
-    char *full_path = NULL;
-    
-    if (command[0] == '/')
-    {
-        execve(command, args, NULL);
-        handle_execution_error(command, program_name);
-    }
-    
-    full_path = find_directory(command);
-    
-    if (full_path == NULL)
-    {
-        handle_execution_error(command, program_name);
-    }
-    
-    execve(full_path, args, NULL);
-    handle_execution_error(command, program_name);
-    
-    /* This return statement is added to prevent a compilation error. */
-    return (1);
+	char *full_path = NULL;
+
+	if (command[0] == '/')
+	{
+		execve(command, args, NULL);
+		handle_execution_error(command, program_name);
+	}
+
+	full_path = find_directory(command);
+
+	if (full_path == NULL)
+	{
+		handle_execution_error(command, program_name);
+	}
+
+	execve(full_path, args, NULL);
+	handle_execution_error(command, program_name);
+
+	/* This return statement is added to prevent a compilation error. */
+	return (1);
 }
 
 /**
@@ -116,6 +116,6 @@ int execute_child_command(char *command, char **args, char *program_name)
 
 void handle_execution_error(char *command, char *program_name)
 {
-    fprintf(stderr, "%s: %d: %s: %s\n", program_name, errno, command, strerror(errno));
-    exit(1);
+	fprintf(stderr, "%s: %d: %s: %s\n", program_name, errno, command, strerror(errno));
+	exit(1);
 }
