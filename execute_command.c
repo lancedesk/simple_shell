@@ -19,12 +19,12 @@ void handle_execution_error(char *command, char *program_name);
  *         error code.
  */
 
-int execute_command(char *command,
-		char **args, int is_interactive, char *program_name
-		)
+int execute_command(
+		char *command, char **args, int is_interactive, char *program_name)
 {
-	pid_t pid = fork();
 	int result, status;
+
+	pid_t pid = fork();
 
 	if (command == NULL)
 	{
