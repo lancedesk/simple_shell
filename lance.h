@@ -13,7 +13,8 @@
 
 int _printer(const char *prompt);
 char *find_directory(char *command);
-int execute_command(char *command, char **args, int is_interactive, char *program_name);
+int execute_command(
+		char *command, char **args, int is_interactive, char *program_name);
 int _printer(const char *prompt);
 void exit_shell(void);
 void handle_ctrl_d(void);
