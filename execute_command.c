@@ -19,7 +19,9 @@ void handle_execution_error(char *command, char *program_name);
  *         error code.
  */
 
-int execute_command(char *command, char **args, int is_interactive, char *program_name)
+int execute_command(char *command,
+		char **args, int is_interactive, char *program_name
+		)
 {
 	pid_t pid = fork();
 	int result, status;
@@ -107,15 +109,19 @@ int execute_child_command(char *command, char **args, char *program_name)
 }
 
 /**
- * handle_execution_error - Handle execution error and print an error message.
+ * handle_execution_error - Handle execution error
+ * and print an error message.
  * @command: The command that failed to execute.
  * @program_name: The name of the program (usually argv[0]).
  *
- * This function prints an error message to stderr when a command fails to execute.
+ * This function prints an error message to stderr
+ * when a command fails to execute.
  */
 
 void handle_execution_error(char *command, char *program_name)
 {
-	fprintf(stderr, "%s: %d: %s: %s\n", program_name, errno, command, strerror(errno));
+	fprintf(stderr, "%s: %d: %s: %s\n", program_name, errno,
+			command, strerror(errno)
+	       );
 	exit(1);
 }
