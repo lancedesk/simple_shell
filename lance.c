@@ -2,7 +2,9 @@
 
 /**
  * print_prompt - Print the shell prompt in interactive mode.
+ * @is_interactive: check if interactive or not
  */
+
 void print_prompt(int is_interactive)
 {
 	if (is_interactive)
@@ -13,7 +15,10 @@ void print_prompt(int is_interactive)
 
 /**
  * read_input - Read a line of input from the user.
+ * @input_size: input size;
+ * Return: read input from user
  */
+
 char *read_input(size_t *input_size)
 {
 	char *input = NULL;
@@ -36,7 +41,11 @@ char *read_input(size_t *input_size)
 
 /**
  * split_input - Split the input into command and arguments.
+ * @input: user input
+ * @argc: input arguments
+ * Return: tokenized array
  */
+
 char **split_input(char *input, int argc)
 {
 	char *command = strtok(input, " ");
@@ -61,6 +70,14 @@ char **split_input(char *input, int argc)
 	args[i] = NULL;
 	return (args);
 }
+
+/**
+ * main - The main entry point of the Lance Shell.
+ *
+ * @argc: The number of command-line arguments.
+ * @argv: An array of strings containing the command-line arguments.
+ * Return: An integer representing the exit status of the shell.
+ */
 
 int main(int argc, char **argv)
 {
@@ -96,12 +113,12 @@ int main(int argc, char **argv)
 		status = execute_command(args[0], args, is_interactive, argv[0]);
 		free(args);
 
-		if (is_interactive && status != 0) {
+		if (is_interactive && status != 0)
+		{
 			/* perror("Command failed"); */
 		}
 	}
 	/* Free the memory allocated for the input. */
 	free(input);
-
 	return (0);
 }
