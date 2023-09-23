@@ -90,35 +90,35 @@ int main(int argc, char **argv)
 	signal(SIGINT, SIG_IGN);
 
 	is_interactive = isatty(fileno(stdin));
-
 	while (1)
 	{
 		print_prompt(is_interactive);
-
 		if (input != NULL)
 		{
 			free(input);
 			input = NULL;
 		}
-
 		input = read_input(&input_size);
-
 		if (strcmp(input, "exit") == 0)
 		{
 			free(input);
 			exit_shell();
 		}
-
-		args = split_input(input, argc);
-		status = execute_command(args[0], args, is_interactive, argv[0]);
-		free(args);
-
-		if (is_interactive && status != 0)
+		if (_strcmp(input, "env") == 0)
 		{
-			/* perror("Command failed"); */
+			_handle_env(input);
+		}
+		else
+		{
+			args = split_input(input, argc);
+			status = execute_command(args[0], args, is_interactive, argv[0]);
+			free(args);
+			if (is_interactive && status != 0)
+			{
+				/* perror("Command failed"); */
+			}
 		}
 	}
-	/* Free the memory allocated for the input. */
 	free(input);
 	return (0);
 }
