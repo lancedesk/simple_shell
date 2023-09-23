@@ -123,5 +123,6 @@ void handle_execution_error(char *command, char *program_name)
 	fprintf(stderr, "%s: %d: %s: %s\n", program_name, errno,
 			command, strerror(errno)
 	       );
-	exit(1);
+	exit(127);
 }
+
