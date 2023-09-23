@@ -16,7 +16,7 @@
 #include <stdbool.h>
 #include <errno.h>
 
-
+void change_directory(const char *newDir, __attribute__((unused))int status);
 int _printer(const char *prompt);
 char *find_directory(char *command);
 int execute_command(
