@@ -35,7 +35,7 @@ char *read_input(size_t *input_size)
 		handle_ctrl_d();
 	}
 
-	input[strlen(input) - 1] = '\0';
+	input[_strlen(input) - 1] = '\0';
 	return (input);
 }
 
