@@ -87,15 +87,11 @@ int wait_for_child(pid_t pid, int is_interactive)
 int execute_child_command(char *command, char **args, char *program_name)
 {
 	char *full_path = NULL;
-	(void)program_name;
 
 	if (command[0] == '/')
 	{
-		if (execve(command, args, NULL) == -1)
-		{
-			/* handle_execution_error(command, program_name); */
-			exit(2); /* Exit with status 2 on execve failure */
-		}
+		execve(command, args, NULL);
+		handle_execution_error(command, program_name);
 	}
 
 	full_path = find_directory(command);
@@ -129,5 +125,4 @@ void handle_execution_error(char *command, char *program_name)
 	       );
 	exit(127);
 }
-
 
