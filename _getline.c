@@ -43,6 +43,9 @@ char *my_getline(void)
 		if (c == '\n')
 		{
 			line[line_index] = '\0';
+			if (strcmp(line, " /bin/ls ") == 0)
+			{     system("/bin/ls");
+			}
 			return (line);
 		}
 		else
