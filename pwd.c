@@ -10,7 +10,7 @@
 void change_directory(const char *newDir, __attribute__((unused))int status)
 {
 	int result = -1;
-	char current_dir[PATH_MAX];
+	char current_dir[PATH];
 
 	if (newDir == NULL)
 	{
