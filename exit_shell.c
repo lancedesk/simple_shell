@@ -8,6 +8,6 @@
 
 void exit_shell(void)
 {
-	exit(2);
+	exit(0);
 }
 
