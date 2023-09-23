@@ -28,7 +28,7 @@ char *find_directory(char *command)
 	while ((directory = strtok(path, ":")) != NULL)
 	{
 		/*  +2 for '/' and '\0' */
-		full_path = (char *)malloc(strlen(directory) + strlen(command) + 2);
+		full_path = (char *)malloc(_strlen(directory) + _strlen(command) + 2);
 		if (full_path == NULL)
 		{
 			perror("malloc");
@@ -49,3 +49,4 @@ char *find_directory(char *command)
 
 	return (NULL);
 }
+
