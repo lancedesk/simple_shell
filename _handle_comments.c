@@ -10,21 +10,16 @@
 int _handle_comments(char *input)
 {
 	int i;
-	int in_comment = 0;
 
 	for (i = 0; input[i] != '\0'; i++)
 	{
-		if (input[i] == '#' && (i == 0 || input[i - 1] == ' '))
+		if (input[i] == '#')
 		{
-			in_comment = 1;
-			input[i] = '\0'; /* Swap '#' with '\0' */
-		}
-		else if (input[i] != ' ' && in_comment)
-		{
-			in_comment = 0;
+			input[i] = '\0';
+			return (1);  /* Return 1 if a comment is found */
 		}
 	}
-	/* Return 1 if a comment was handled, 0 otherwise */
-	return (in_comment);
+	return (0);  /* Return 0 if no comment is found */
 }
+
 
