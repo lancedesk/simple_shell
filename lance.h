@@ -16,6 +16,7 @@
 #include <stdbool.h>
 #include <errno.h>
 
+
 int _printer(const char *prompt);
 char *find_directory(char *command);
 int execute_command(
