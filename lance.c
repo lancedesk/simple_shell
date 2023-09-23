@@ -99,7 +99,7 @@ int main(int argc, char **argv)
 			input = NULL;
 		}
 		input = read_input(&input_size);
-		if (strcmp(input, "exit") == 0)
+		if (_strcmp(input, "exit") == 0)
 		{
 			free(input);
 			exit_shell();
