@@ -20,7 +20,7 @@ int _handle_comments(char *input)
 
 		if (input[i] == '#' && !in_quote)
 		{
-			input[i] = '\0';
+			input[i] = '\n';
 			return 1;  /* Return 1 if a comment is found and has been handled */
 		}
 	}
