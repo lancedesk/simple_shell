@@ -31,4 +31,7 @@ void _puts(const char *str);
 void _handle_env(char *input);
 /* Declare the external environment variable */
 extern char **environ;
+
+int _handle_comments(char *input);
 #endif
+

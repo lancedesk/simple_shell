@@ -82,13 +82,11 @@ char **split_input(char *input, int argc)
 int main(int argc, char **argv)
 {
 	char *input = NULL;
-	int is_interactive;
+	int is_interactive, status;
 	size_t input_size = 0;
-	int status;
 	char **args = NULL;
 
 	signal(SIGINT, SIG_IGN);
-
 	is_interactive = isatty(fileno(stdin));
 	while (1)
 	{
@@ -99,6 +97,10 @@ int main(int argc, char **argv)
 			input = NULL;
 		}
 		input = read_input(&input_size);
+		if (_handle_comments(input)) /* Handle comments */
+		{
+			continue; /* Skip this iteration if line was a comment */
+		}
 		if (_strcmp(input, "exit") == 0)
 		{
 			free(input);
@@ -113,12 +115,10 @@ int main(int argc, char **argv)
 			args = split_input(input, argc);
 			status = execute_command(args[0], args, is_interactive, argv[0]);
 			free(args);
-			if (is_interactive && status != 0)
-			{
-				/* perror("Command failed"); */
-			}
+			(void)status;/* if (is_interactive && status != 0) {} */
 		}
 	}
 	free(input);
 	return (0);
 }
+
