@@ -27,5 +27,6 @@ bool is_input_empty(const char *str)
 		}
 		str++;
 	}
+
 	return (true);
 }
