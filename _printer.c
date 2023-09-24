@@ -6,6 +6,7 @@
  * @prompt: A pointer to the null-terminated string
  * containing the prompt message.
  *
+ *
  * Return: Upon success, the number of characters written
  * otherwise, -1 is returned,
  * and errno is set to indicate the error.
