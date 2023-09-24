@@ -21,6 +21,5 @@ void handle_ctrl_d(void)
 		/*  Input is not from a pipe, so print a newline character. */
 		_printer("\n");
 	}
-
 	exit(0);
 }
